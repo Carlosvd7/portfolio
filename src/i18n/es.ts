@@ -7,12 +7,13 @@ const es = {
   },
   a11y: {
     skip: 'Saltar al contenido',
-    home: 'Inicio, Carlos Velázquez',
+    home: 'Inicio, Carlos Manuel Velázquez',
     mainNav: 'Navegación principal',
     openMenu: 'Abrir menú',
     closeMenu: 'Cerrar menú',
     langSwitch: 'Cambiar idioma',
     openPalette: 'Abrir la paleta de comandos',
+    closePalette: 'Cerrar la paleta de comandos',
     newTab: '(se abre en una pestaña nueva)',
   },
   nav: {

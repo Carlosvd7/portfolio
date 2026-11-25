@@ -3,8 +3,10 @@
  * Privacidad: aquí NUNCA van teléfono, dirección, DNI ni fecha de nacimiento.
  */
 export const site = {
+  /** Nombre legal completo: footer, JSON-LD, CV y Open Graph. */
   name: 'Carlos Manuel Velázquez Diego',
-  shortName: 'Carlos Velázquez',
+  /** Nombre profesional (nombre compuesto + primer apellido): títulos y marca. */
+  shortName: 'Carlos Manuel Velázquez',
   role: 'AI & Software Engineer',
   email: 'carlosmavd2003@gmail.com',
   cv: '/cv/Carlos-Velazquez-CV.pdf',

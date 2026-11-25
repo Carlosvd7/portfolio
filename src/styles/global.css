@@ -132,6 +132,11 @@
     border-radius: 6px;
   }
 
+  /* Destinos de salto (main, secciones desde la paleta): reciben foco, sin contorno */
+  [tabindex='-1']:focus {
+    outline: none;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -382,6 +387,73 @@
   animation: pulse-dot 2s var(--ease-out-expo) infinite;
 }
 
+/* ---------- Scroll reveal ----------
+   Se usa `animation` (no `transition`) para no pisar las transiciones de hover de cada
+   componente, con fill-mode `backwards` para liberar el transform al terminar.
+   Solo se oculta si hay JS (`scripting: enabled`): sin JS el contenido se ve siempre. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes rise {
+  from {
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+@media (scripting: enabled) {
+  [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+  }
+  [data-reveal].is-revealed {
+    animation: reveal-up var(--dur-reveal) var(--ease-out-expo) backwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+/* Entrada del hero en CSS puro (no espera al JS ni retrasa el LCP:
+   titular y subtítulo solo se desplazan, nunca empiezan invisibles) */
+[data-hero-in] {
+  animation: reveal-up 700ms var(--ease-out-expo) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+}
+[data-hero-in='rise'] {
+  animation-name: rise;
+}
+/* Escalonado sin atributos style (CSP): data-d="1…6" */
+[data-d='1'] { --i: 1; }
+[data-d='2'] { --i: 2; }
+[data-d='3'] { --i: 3; }
+[data-d='4'] { --i: 4; }
+[data-d='5'] { --i: 5; }
+[data-d='6'] { --i: 6; }
+
+/* Spotlight: brillo radial que sigue al cursor dentro de la tarjeta.
+   Va en background-image (bajo el contenido) y se desvanece con --spot. */
+@property --spot {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+[data-spotlight] {
+  background-image: radial-gradient(
+    520px circle at var(--x, 50%) var(--y, 0%),
+    rgb(139 124 255 / calc(0.1 * var(--spot))),
+    transparent 45%
+  ) !important; /* los componentes fijan su `background`; el brillo va siempre encima del color */
+  transition: --spot 300ms var(--ease-out-expo);
+}
+[data-spotlight]:hover {
+  --spot: 1;
+}
+
 /* Transición nativa entre páginas (cambio de idioma), sin JS */
 @view-transition {
   navigation: auto;
@@ -411,6 +483,18 @@
   }
   .site-bg__glow {
     animation: none;
+  }
+  /* Movimiento reducido: las entradas pasan a un fundido simple, sin desplazamiento */
+  [data-reveal].is-revealed,
+  [data-hero-in]:not([data-hero-in='rise']) {
+    animation: reveal-fade 400ms ease-out backwards !important;
+    animation-delay: 0ms !important;
+  }
+  [data-hero-in='rise'] {
+    animation: none !important;
+  }
+  [data-spotlight] {
+    background-image: none !important;
   }
   @view-transition {
     navigation: none;

@@ -84,8 +84,8 @@ const dateLabel = (e: Entry) =>
   <ol class="timeline__list">
   {
     entries.map((e) => (
-      <li class:list={['tl-item', { 'is-upcoming': e.upcoming }]} data-reveal>
-        <span class="tl-item__node" aria-hidden="true" />
+      <li class:list={['tl-item', { 'is-upcoming': e.upcoming }]} data-reveal data-tl-item>
+        <span class="tl-item__node" aria-hidden="true" data-tl-node />
         <p class="tl-item__date font-tech">
           <time datetime={e.start}>{dateLabel(e)}</time>
         </p>
@@ -226,6 +226,23 @@ const dateLabel = (e: Entry) =>
     box-shadow:
       0 0 0 4px color-mix(in srgb, var(--accent-2) 14%, transparent),
       0 0 16px 2px color-mix(in srgb, var(--accent-2) 55%, transparent);
+  }
+  .tl-item__node {
+    transition:
+      border-color 400ms var(--ease-out-expo),
+      box-shadow 400ms var(--ease-out-expo),
+      transform 400ms var(--ease-out-expo);
+  }
+  /* Con JS, el nodo se enciende cuando la línea llega a él */
+  @media (scripting: enabled) {
+    .tl-item:not(.is-lit) .tl-item__node {
+      border-color: var(--border-strong);
+      box-shadow: none;
+      transform: scale(0.85);
+    }
+    .timeline__fill {
+      transform: scaleY(var(--progress, 0));
+    }
   }
 
   .tl-item__date {

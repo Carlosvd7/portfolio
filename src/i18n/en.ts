@@ -9,12 +9,13 @@ const en: Dict = {
   },
   a11y: {
     skip: 'Skip to content',
-    home: 'Home, Carlos Velázquez',
+    home: 'Home, Carlos Manuel Velázquez',
     mainNav: 'Main navigation',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     langSwitch: 'Change language',
     openPalette: 'Open the command palette',
+    closePalette: 'Close the command palette',
     newTab: '(opens in a new tab)',
   },
   nav: {

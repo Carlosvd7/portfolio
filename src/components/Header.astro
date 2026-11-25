@@ -120,11 +120,6 @@ const other = otherLang(lang);
   </a>
 </dialog>
 
-<script>
-  import { initHeader } from '../scripts/header';
-  initHeader();
-</script>
-
 <style>
   .site-header {
     position: sticky;
@@ -157,6 +152,11 @@ const other = otherLang(lang);
     color: var(--text-strong);
     letter-spacing: -0.01em;
     white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .site-header__inner > .logo {
+    flex-shrink: 1;
   }
 
   /* ---------- Navegación escritorio ---------- */
@@ -220,6 +220,7 @@ const other = otherLang(lang);
   /* ---------- Acciones ---------- */
   .site-header__actions {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     gap: 0.5rem;
   }
@@ -322,7 +323,7 @@ const other = otherLang(lang);
     margin: 0;
     padding: 0 20px 28px;
     border: 0;
-    background: rgb(9 9 13 / 0.96);
+    background: var(--bg);
     color: var(--text);
     opacity: 0;
     transform: translateY(-8px);

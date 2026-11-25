@@ -9,6 +9,7 @@ import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CommandPalette from '../components/CommandPalette.astro';
 import { getLang, useT, homePath, htmlLang, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -66,8 +67,13 @@ const alt = (l: Lang) => new URL(homePath(l), Astro.site).href;
     </main>
 
     <Footer lang={lang} />
+    <CommandPalette lang={lang} />
   </body>
 </html>
+
+<script>
+  import '../scripts/main';
+</script>
 
 <style>
   .skip-link {

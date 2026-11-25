@@ -58,12 +58,11 @@ const { num, id, title, icon } = Astro.props;
     transform-origin: left;
     transition: transform 900ms var(--ease-out-expo) 150ms;
   }
-  :global(.js) .section-head__line {
-    transform: scaleX(0);
-  }
-  :global(.js) .is-revealed .section-head__line,
-  :global(.js) .section-head.is-revealed .section-head__line {
-    transform: scaleX(1);
+  /* La línea se dibuja de izquierda a derecha al entrar la cabecera en pantalla */
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    .section-head:not(:global(.is-revealed)) .section-head__line {
+      transform: scaleX(0);
+    }
   }
 
   @media (width < 520px) {

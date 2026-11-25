@@ -20,7 +20,10 @@ const t = useT(lang);
           <span class="metric__icon" aria-hidden="true">
             <Icon name={m.icon} />
           </span>
-          <p class="metric__value">{m.prefix}<span data-count={m.value}>{m.value}</span>{m.suffix}</p>
+          <p class="metric__value">
+            <span class="sr-only">{`${m.prefix ?? ''}${m.value}${m.suffix ?? ''}`}</span>
+            <span aria-hidden="true">{m.prefix}<span data-count={m.value}>{m.value}</span>{m.suffix}</span>
+          </p>
           <p class="metric__text">{m.text[lang]}</p>
         </li>
       ))

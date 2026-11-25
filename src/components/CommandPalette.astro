@@ -1,0 +1,397 @@
+---
+/**
+ * Command palette (Ctrl/⌘ + K). Dialog modal nativo: atrapa el foco y se cierra con Esc.
+ * Patrón combobox + listbox (aria-activedescendant): el foco se queda en el buscador
+ * y las flechas mueven la opción activa.
+ */
+import { Icon } from 'astro-icon/components';
+import { site, sectionIds } from '../data/site';
+import { useT, homePath, otherLang, languages, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const other = otherLang(lang);
+
+type Item = {
+  id: string;
+  label: string;
+  icon: string;
+  action: 'goto' | 'open' | 'copy' | 'download' | 'lang' | 'ai';
+  value?: string;
+  hint?: string;
+  keywords?: string;
+  brand?: string;
+  badge?: string;
+};
+
+const groups: { id: string; label: string; items: Item[] }[] = [
+  {
+    id: 'goto',
+    label: t.palette.groups.goto,
+    items: [
+      { id: 'experience', label: t.nav.experience, icon: 'lucide:briefcase', action: 'goto', value: sectionIds.experience, keywords: 'experience experiencia ntt formación education timeline' },
+      { id: 'projects', label: t.nav.projects, icon: 'lucide:folder-git-2', action: 'goto', value: sectionIds.projects, keywords: 'projects proyectos calculacasa portfolio' },
+      { id: 'stack', label: t.nav.stack, icon: 'lucide:layers', action: 'goto', value: sectionIds.stack, keywords: 'stack tecnologías technologies skills python' },
+      { id: 'credentials', label: t.nav.credentials, icon: 'lucide:badge-check', action: 'goto', value: sectionIds.credentials, keywords: 'credentials credenciales certificados certificates idiomas languages' },
+      { id: 'contact', label: t.nav.contact, icon: 'lucide:mail', action: 'goto', value: sectionIds.contact, keywords: 'contact contacto email hire contratar' },
+    ],
+  },
+  {
+    id: 'open',
+    label: t.palette.groups.open,
+    items: [
+      { id: 'linkedin', label: 'LinkedIn', icon: 'simple-icons:linkedin', brand: 'linkedin', action: 'open', value: site.links.linkedin, hint: '↗' },
+      { id: 'github', label: 'GitHub', icon: 'simple-icons:github', brand: 'github', action: 'open', value: site.links.github, hint: '↗', keywords: 'code código repos' },
+      { id: 'calculacasa', label: 'calculaCasa.com', icon: 'lucide:globe', action: 'open', value: site.links.calculacasa, hint: '↗', keywords: 'web live producto product' },
+    ],
+  },
+  {
+    id: 'actions',
+    label: t.palette.groups.actions,
+    items: [
+      { id: 'copy', label: t.palette.copyEmail, icon: 'lucide:copy', action: 'copy', value: site.email, hint: site.email, keywords: 'email correo mail copy copiar' },
+      { id: 'cv', label: t.palette.downloadCv, icon: 'lucide:file-down', action: 'download', value: site.cv, hint: 'PDF', keywords: 'cv resume currículum curriculum pdf' },
+      { id: 'lang', label: t.palette.switchLang, icon: 'lucide:languages', action: 'lang', value: homePath(other), hint: languages[other], keywords: 'language idioma english español es en' },
+    ],
+  },
+  {
+    id: 'ai',
+    label: t.palette.groups.ai,
+    items: [
+      { id: 'ask', label: t.palette.askAi, icon: 'lucide:sparkles', action: 'ai', badge: t.ask.soon, keywords: 'ai ia asistente assistant claude chat preguntar ask' },
+    ],
+  },
+];
+---
+
+<dialog id="palette" class="palette" aria-labelledby="palette-title" data-palette>
+  <div class="palette__panel">
+    <h2 id="palette-title" class="sr-only">{t.palette.title}</h2>
+
+    <div class="palette__search">
+      <Icon name="lucide:search" aria-hidden="true" />
+      <input
+        type="text"
+        class="palette__input"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="palette-list"
+        aria-autocomplete="list"
+        aria-labelledby="palette-title"
+        placeholder={t.palette.placeholder}
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        data-palette-input
+      />
+      <button type="button" class="kbd palette__esc" data-palette-close aria-label={t.a11y.closePalette}>Esc</button>
+    </div>
+
+    <div id="palette-list" class="palette__list" role="listbox" aria-labelledby="palette-title" data-palette-list>
+      {
+        groups.map((g) => (
+          <div class="palette__group" role="group" aria-labelledby={`pg-${g.id}`} data-palette-group>
+            <p id={`pg-${g.id}`} class="palette__group-label font-tech">
+              {g.label}
+            </p>
+            {g.items.map((item) => (
+              <div
+                id={`po-${item.id}`}
+                class="palette__option"
+                role="option"
+                aria-selected="false"
+                data-option
+                data-action={item.action}
+                data-value={item.value}
+                data-search={`${item.label} ${item.keywords ?? ''}`}
+              >
+                <span class="palette__icon" aria-hidden="true">
+                  <Icon name={item.icon} data-brand={item.brand} />
+                </span>
+                <span class="palette__label">{item.label}</span>
+                {item.badge && <span class="palette__badge font-tech">{item.badge}</span>}
+                {item.hint && (
+                  <span class="palette__hint font-tech" aria-hidden="true">
+                    {item.hint}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        ))
+      }
+      <p class="palette__empty" data-palette-empty hidden>{t.palette.empty}</p>
+    </div>
+
+    <div class="palette__ai" data-palette-ai hidden>
+      <span class="palette__ai-icon" aria-hidden="true"><Icon name="lucide:sparkles" /></span>
+      <div>
+        <p class="palette__ai-title">
+          {t.palette.askAi}
+          <span class="palette__badge font-tech">{t.ask.soon}</span>
+        </p>
+        <p class="palette__ai-text">{t.palette.askAiSoon}</p>
+        <a href={`mailto:${site.email}`} class="btn btn-primary palette__ai-cta">
+          <Icon name="lucide:mail" aria-hidden="true" />
+          {site.email}
+        </a>
+      </div>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite" data-palette-status></p>
+
+    <footer class="palette__footer font-tech" aria-hidden="true">
+      <span><kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> {t.palette.hintNav}</span>
+      <span><kbd class="kbd">↵</kbd> {t.palette.hintSelect}</span>
+      <span><kbd class="kbd">esc</kbd> {t.palette.hintClose}</span>
+    </footer>
+  </div>
+</dialog>
+
+<script>
+  import { initPalette } from '../scripts/palette';
+  initPalette();
+</script>
+
+<style>
+  .palette {
+    width: min(640px, calc(100vw - 24px));
+    max-width: none;
+    max-height: min(560px, calc(100dvh - 24px));
+    margin: 12vh auto auto;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    color: var(--text);
+    box-shadow:
+      0 40px 100px -20px rgb(0 0 0 / 0.85),
+      0 0 0 1px rgb(255 255 255 / 0.03) inset,
+      0 0 80px -30px color-mix(in srgb, var(--accent-2) 60%, transparent);
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+    transition:
+      opacity 200ms var(--ease-out-expo),
+      transform 200ms var(--ease-out-expo),
+      overlay 200ms allow-discrete,
+      display 200ms allow-discrete;
+  }
+  .palette[open] {
+    opacity: 1;
+    transform: none;
+  }
+  @starting-style {
+    .palette[open] {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.985);
+    }
+  }
+  .palette::backdrop {
+    background: rgb(5 5 8 / 0.6);
+    backdrop-filter: blur(4px);
+  }
+  @media (width < 640px) {
+    .palette {
+      margin-top: 12px;
+    }
+  }
+
+  .palette__panel {
+    display: flex;
+    flex-direction: column;
+    max-height: inherit;
+  }
+
+  .palette__search {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.4rem 0.6rem 0.4rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .palette__search > svg {
+    width: 18px;
+    height: 18px;
+  }
+  .palette__input {
+    flex: 1;
+    min-width: 0;
+    min-height: 52px;
+    border: 0;
+    background: transparent;
+    color: var(--text-strong);
+    font: inherit;
+    font-size: 1rem;
+    outline: none;
+  }
+  .palette__input::placeholder {
+    color: var(--muted);
+  }
+  .palette__search:focus-within {
+    box-shadow: inset 0 -1px 0 var(--accent-2);
+  }
+  .palette__esc {
+    min-height: 32px;
+    padding-inline: 0.55rem;
+    cursor: pointer;
+  }
+
+  .palette__list {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.4rem 0.5rem 0.6rem;
+  }
+  .palette__group[hidden] {
+    display: none;
+  }
+  .palette__group-label {
+    padding: 0.75rem 0.65rem 0.35rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .palette__option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 44px;
+    padding: 0.35rem 0.65rem;
+    border-radius: 10px;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+  }
+  .palette__option[hidden] {
+    display: none;
+  }
+  .palette__option[aria-selected='true'] {
+    background: color-mix(in srgb, var(--accent-2) 14%, var(--surface-2));
+    box-shadow: inset 2px 0 0 var(--accent-2);
+    color: var(--text-strong);
+  }
+  .palette__icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    transition: color var(--dur-fast);
+  }
+  .palette__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  .palette__option[aria-selected='true'] .palette__icon {
+    color: var(--accent);
+    border-color: var(--border-strong);
+  }
+  .palette__option[aria-selected='true'] .palette__icon [data-brand] {
+    color: var(--brand);
+  }
+  .palette__label {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .palette__hint {
+    max-width: 45%;
+    overflow: hidden;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .palette__badge {
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent-2) 40%, transparent);
+    background: color-mix(in srgb, var(--accent-2) 12%, transparent);
+    color: #c4bbff;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+  .palette__empty {
+    padding: 1.5rem 0.65rem;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .palette__ai {
+    display: flex;
+    gap: 0.9rem;
+    margin: 0 0.6rem 0.6rem;
+    padding: 1rem;
+    border: 1px dashed color-mix(in srgb, var(--accent-2) 45%, var(--border-strong));
+    border-radius: var(--radius-card-sm);
+    background: color-mix(in srgb, var(--accent-2) 7%, transparent);
+  }
+  .palette__ai[hidden] {
+    display: none;
+  }
+  .palette__ai-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--accent-2);
+    color: #0e0a24;
+  }
+  .palette__ai-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .palette__ai-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+  .palette__ai-text {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .palette__ai-cta {
+    margin-top: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .palette__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    padding: 0.65rem 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .palette__footer span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .palette__footer .kbd {
+    padding: 0 0.3rem;
+    font-size: 0.68rem;
+  }
+  @media (hover: none) {
+    .palette__footer {
+      display: none;
+    }
+  }
+</style>

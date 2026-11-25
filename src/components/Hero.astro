@@ -23,19 +23,19 @@ const socials = [
 
 <section class="hero container-x" aria-labelledby="hero-title">
   <div class="hero__copy">
-    <p class="hero__pill font-tech" data-reveal>
+    <p class="hero__pill font-tech" data-hero-in>
       <span class="status-dot" aria-hidden="true"></span>
       <span><span class="text-ok">{t.hero.status}</span> · {site.role}</span>
     </p>
 
-    <h1 id="hero-title" class="hero__title" data-reveal>
+    <h1 id="hero-title" class="hero__title" data-hero-in="rise" data-d="1">
       {t.hero.greeting} <span class="text-accent">{t.hero.name}</span>.
     </h1>
 
-    <p class="hero__subtitle" data-reveal>{t.hero.subtitle}</p>
-    <p class="hero__intro" data-reveal set:html={rich(t.hero.intro)} />
+    <p class="hero__subtitle" data-hero-in="rise" data-d="2">{t.hero.subtitle}</p>
+    <p class="hero__intro" data-hero-in data-d="3" set:html={rich(t.hero.intro)} />
 
-    <div class="hero__ctas" data-reveal>
+    <div class="hero__ctas" data-hero-in data-d="4">
       <a href={`#${sectionIds.experience}`} class="btn btn-primary">
         {t.hero.ctaExperience}
         <Icon name="lucide:arrow-down" aria-hidden="true" data-nudge="down" />
@@ -57,7 +57,7 @@ const socials = [
     </div>
   </div>
 
-  <div class="hero__visual" data-reveal>
+  <div class="hero__visual" data-hero-in data-d="3">
     <div class="hero__tilt" data-tilt>
       <CodeCard lang={lang} />
       <Terminal lang={lang} />
