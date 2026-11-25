@@ -25,8 +25,11 @@ export default defineConfig({
   ],
   // No usamos bloques de código Markdown; Shiki es incompatible con la CSP.
   markdown: { syntaxHighlight: false },
-  // CSP con hashes generados en build para los scripts y estilos en línea.
+  // CSP con hashes generados en build (meta). netlify.toml añade la cabecera con el resto
+  // de directivas (default-src, frame-ancestors…), que solo funcionan como cabecera HTTP.
   security: { csp: true },
+  // Todo el CSS como archivo externo: ningún <style> en línea que la cabecera CSP tenga que permitir.
+  build: { inlineStylesheets: 'never' },
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,0 +1,51 @@
+# Configuración de despliegue en Netlify.
+# Cada push a `main` construye y publica la web automáticamente.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Misma versión LTS que en local (nvm use 24). Astro 7 necesita Node >= 22.23.
+  NODE_VERSION = "24"
+
+# ---------------------------------------------------------------------------
+# Cabeceras de seguridad para todo el sitio
+# La CSP de scripts/estilos con hashes la genera Astro como <meta>; esta cabecera
+# añade las directivas que solo funcionan por HTTP. Ambas se aplican a la vez.
+# Fase 2 (asistente IA): connect-src 'self' ya permite llamar a /.netlify/functions/ask
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# Recursos con hash en el nombre (JS, CSS, fuentes, imágenes optimizadas): caché de 1 año
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Imagen OG y CV: pueden cambiar sin cambiar de nombre, caché corta
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/cv/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    X-Robots-Tag = "noindex"
+
+# Cualquier ruta inexistente muestra la página 404 personalizada (con estado 404)
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
