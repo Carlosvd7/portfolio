@@ -7,8 +7,8 @@ label:
   es: Producto propio · En producción
   en: Own product · In production
 description:
-  es: Hub de calculadoras para el hogar con fórmulas reales y arquitectura declarativa. **130 URLs indexadas**, **top 10 en Google en dos semanas** y unas **500 impresiones diarias** en búsquedas.
-  en: A hub of home calculators built on real formulas and a declarative architecture. **130 indexed URLs**, **Google top 10 within two weeks** and around **500 daily search impressions**.
+  es: Hub de calculadoras para el hogar con fórmulas reales y arquitectura declarativa. **130 URLs indexadas**, **top 10 en Google en dos semanas**, unas **500 impresiones** y una media de **10 clics diarios** desde Google.
+  en: A hub of home calculators built on real formulas and a declarative architecture. **130 indexed URLs**, **Google top 10 within two weeks**, around **500 impressions** and an average of **10 clicks a day** from Google.
 status: live
 tech: [nuxt, typescript, tailwindcss, netlify]
 links:
