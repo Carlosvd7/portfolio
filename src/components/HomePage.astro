@@ -1,29 +1,143 @@
 ---
 /**
- * Página de inicio compartida por /es y /en.
- * Fase 1: estructura mínima. Las secciones reales llegan en la fase 3.
+ * Página de inicio compartida por / (ES) y /en/ (EN).
+ * Orden fijo: Hero → Asistente → Métricas → Experiencia → Proyectos → Stack → Credenciales → Contacto.
  */
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { navItems } from '../data/site';
+import Hero from './Hero.astro';
+import AskBar from './AskBar.astro';
+import Metrics from './Metrics.astro';
+import SectionHeader from './SectionHeader.astro';
+import Timeline from './Timeline.astro';
+import ProjectFeatured from './ProjectFeatured.astro';
+import ProjectCard from './ProjectCard.astro';
+import StackGroup from './StackGroup.astro';
+import CredentialCard from './CredentialCard.astro';
+import Contact from './Contact.astro';
+import { site, sectionIds } from '../data/site';
 import { getLang, useT } from '../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
+
+const byOrder = <T extends { data: { order: number } }>(a: T, b: T) => a.data.order - b.data.order;
+const [projects, stack, credentials] = await Promise.all([
+  getCollection('projects').then((p) => p.sort(byOrder)),
+  getCollection('stack').then((s) => s.sort(byOrder)),
+  getCollection('credentials').then((c) => c.sort(byOrder)),
+]);
+const featured = projects.filter((p) => p.data.featured);
+const others = projects.filter((p) => !p.data.featured);
+const stackMain = stack.filter((g) => !g.data.learning);
+const stackLearning = stack.filter((g) => g.data.learning);
 ---
 
 <BaseLayout>
-  <section class="container-x py-24" aria-labelledby="hero-title">
-    <h1 id="hero-title" class="text-[clamp(48px,6.6vw,84px)]">
-      {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <span class="text-accent">Carlos.</span>
-    </h1>
+  <Hero lang={lang} />
+  <AskBar lang={lang} />
+  <Metrics lang={lang} />
+
+  <section id={sectionIds.experience} class="section container-x" aria-labelledby="experience-title">
+    <SectionHeader num={1} id="experience-title" title={t.sections.experience} icon="lucide:briefcase" />
+    <Timeline lang={lang} />
   </section>
-  {
-    navItems.map((item) => (
-      <section id={item.id} class="container-x min-h-[70vh] py-24" aria-labelledby={`${item.id}-title`}>
-        <h2 id={`${item.id}-title`} class="text-[40px]">
-          {t.nav[item.key]}
-        </h2>
-      </section>
-    ))
-  }
+
+  <section id={sectionIds.projects} class="section container-x" aria-labelledby="projects-title">
+    <SectionHeader num={2} id="projects-title" title={t.sections.projects} icon="lucide:folder-git-2" />
+    <div class="projects">
+      {featured.map((p) => <ProjectFeatured project={p} lang={lang} />)}
+      <div class="projects__grid">
+        {others.map((p) => <ProjectCard project={p} lang={lang} />)}
+      </div>
+    </div>
+    <div class="more" data-reveal>
+      <a href={site.links.github} class="btn more__link" target="_blank" rel="noopener noreferrer">
+        <Icon name="simple-icons:github" aria-hidden="true" data-brand="github" />
+        {t.projects.more}
+        <Icon name="lucide:arrow-right" aria-hidden="true" data-nudge="right" />
+        <span class="sr-only">{t.a11y.newTab}</span>
+      </a>
+      <p class="more__hint">{t.projects.moreHint}</p>
+    </div>
+  </section>
+
+  <section id={sectionIds.stack} class="section container-x" aria-labelledby="stack-title">
+    <SectionHeader num={3} id="stack-title" title={t.sections.stack} icon="lucide:layers" />
+    <div class="stack">
+      {stackMain.map((g, i) => <StackGroup group={g} index={i + 1} lang={lang} />)}
+    </div>
+    {
+      stackLearning.map((g) => (
+        <div class="stack__learning">
+          <StackGroup group={g} index={0} lang={lang} />
+        </div>
+      ))
+    }
+  </section>
+
+  <section id={sectionIds.credentials} class="section container-x" aria-labelledby="credentials-title">
+    <SectionHeader num={4} id="credentials-title" title={t.sections.credentials} icon="lucide:badge-check" />
+    <ul class="creds" role="list">
+      {credentials.map((c) => <CredentialCard credential={c} lang={lang} />)}
+    </ul>
+  </section>
+
+  <Contact lang={lang} />
 </BaseLayout>
+
+<style>
+  .section {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .projects {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .projects__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (width >= 768px) {
+    .projects__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (width >= 1024px) {
+    .projects__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 2rem;
+  }
+  .more__hint {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .stack {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (width >= 900px) {
+    .stack {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .stack__learning {
+    margin-top: 1.25rem;
+  }
+
+  .creds {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+</style>

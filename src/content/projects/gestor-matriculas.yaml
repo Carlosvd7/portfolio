@@ -9,6 +9,7 @@ description:
   es: Arquitectura distribuida para gestionar alumnos, expedientes y matrículas.
   en: Distributed architecture to manage students, academic records and enrollments.
 status: done
+icon: lucide:network
 tech: [java, quarkus, docker, postgresql]
 links:
   repo: https://github.com/Carlosvd7/matriculas-alumnos

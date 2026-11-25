@@ -1,0 +1,86 @@
+---
+/**
+ * Mini terminal bajo la tarjeta de perfil.
+ * Sin JS muestra el texto completo; con JS (scripts/typing.ts) lo escribe en bucle.
+ * Los lectores de pantalla leen una sola vez el texto completo (sr-only).
+ */
+import type { Lang } from '../i18n/utils';
+import { useT } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+
+<div class="terminal" data-terminal>
+  <div class="terminal__bar font-tech" aria-hidden="true">
+    <span class="terminal__title">python — carlos@portfolio</span>
+  </div>
+  <p class="sr-only">{t.hero.terminalLabel}: {t.hero.terminalCmd} → {t.hero.terminalOut}</p>
+  <div class="terminal__body font-tech" aria-hidden="true">
+    <p class="terminal__line">
+      <span data-type-cmd data-text={t.hero.terminalCmd}>{t.hero.terminalCmd}</span><span
+        class="terminal__caret"
+        data-type-caret></span>
+    </p>
+    <p class="terminal__line terminal__out" data-type-out>{t.hero.terminalOut}</p>
+  </div>
+</div>
+
+<style>
+  .terminal {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card-sm);
+    background: #0c0c11;
+  }
+  .terminal__bar {
+    padding: 0.45rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .terminal__body {
+    display: grid;
+    gap: 0.25rem;
+    min-height: calc(2 * 1.7em + 1.6rem);
+    padding: 0.8rem 0.95rem;
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+  .terminal__line {
+    min-height: 1.7em;
+    color: var(--text);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .terminal__out {
+    color: var(--ok);
+    transition: opacity var(--dur-base) var(--ease-out-expo);
+  }
+  .terminal__out[data-hidden] {
+    opacity: 0;
+  }
+  .terminal__caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: -0.18em;
+    background: var(--accent);
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+  @media (width >= 420px) {
+    .terminal__body {
+      font-size: 13px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .terminal__caret {
+      animation: none;
+    }
+  }
+</style>

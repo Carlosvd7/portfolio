@@ -9,6 +9,8 @@ description:
   es: Detección de gestos en tiempo real, de la captura de datos al modelo en vivo.
   en: Real-time gesture detection, from data capture to a live model.
 status: done
+icon: lucide:hand
+demoPending: true
 tech: [python, tensorflow, mediapipe, angular]
 links:
   repo: https://github.com/Carlosvd7/reconocimiento-senas

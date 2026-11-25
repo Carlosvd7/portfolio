@@ -1,0 +1,226 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site, sectionIds } from '../data/site';
+import { useT, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const socials = [
+  { href: site.links.linkedin, label: 'LinkedIn', icon: 'simple-icons:linkedin', brand: 'linkedin', external: true },
+  { href: site.links.github, label: 'GitHub', icon: 'simple-icons:github', brand: 'github', external: true },
+  { href: `mailto:${site.email}`, label: 'Email', icon: 'lucide:mail', brand: 'email' },
+  { href: site.cv, label: t.hero.ctaCv, icon: 'lucide:file-down', brand: 'cv', download: true },
+];
+---
+
+<section id={sectionIds.contact} class="container-x contact-section" aria-labelledby="contact-title">
+  <div class="contact" data-reveal data-spotlight>
+    <span class="contact__icon" aria-hidden="true"><Icon name="lucide:send" /></span>
+    <h2 id="contact-title" class="contact__title">{t.contact.title}</h2>
+    <p class="contact__subtitle">{t.contact.subtitle}</p>
+
+    <div class="contact__ctas">
+      <a href={`mailto:${site.email}`} class="btn btn-primary contact__mail">
+        <Icon name="lucide:mail" aria-hidden="true" />
+        <span class="font-tech">{site.email}</span>
+      </a>
+      <button type="button" class="btn btn-icon" data-copy={site.email} aria-label={t.contact.copy}>
+        <Icon name="lucide:copy" aria-hidden="true" data-copy-icon />
+        <Icon name="lucide:check" aria-hidden="true" data-copied-icon class="hidden text-ok" />
+      </button>
+    </div>
+
+    <p class="sr-only">{t.contact.socialTitle}</p>
+    <ul class="contact__socials" role="list">
+      {
+        socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              class="social"
+              data-brand={s.brand}
+              data-magnetic
+              aria-label={s.external ? `${s.label} ${t.a11y.newTab}` : s.label}
+              {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              {...(s.download ? { download: '' } : {})}
+            >
+              <Icon name={s.icon} aria-hidden="true" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="toast font-tech" role="status" aria-live="polite" data-toast data-text={t.contact.copied}></div>
+</section>
+
+<style>
+  .contact-section {
+    padding-block: clamp(4rem, 10vw, 7.5rem) clamp(3rem, 6vw, 5rem);
+  }
+  .contact {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: clamp(2.5rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    text-align: center;
+    isolation: isolate;
+  }
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: -55%;
+    left: 50%;
+    z-index: -1;
+    width: min(760px, 140%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(139 124 255 / 0.28), rgb(139 124 255 / 0.06) 45%, transparent 70%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .contact::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse at top, #000 10%, transparent 65%);
+    -webkit-mask-image: radial-gradient(ellipse at top, #000 10%, transparent 65%);
+    pointer-events: none;
+  }
+  .contact__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--accent-2) 45%, var(--border-strong));
+    background: color-mix(in srgb, var(--accent-2) 14%, var(--surface));
+    color: #c4bbff;
+  }
+  .contact__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .contact__title {
+    margin-top: 1.5rem;
+    max-width: 16ch;
+    font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+    letter-spacing: -0.04em;
+  }
+  .contact__subtitle {
+    margin-top: 1rem;
+    max-width: 44ch;
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+  .contact__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2.1rem;
+  }
+  .contact__mail {
+    min-height: 52px;
+    padding-inline: 1.3rem;
+    font-size: 0.98rem;
+  }
+  .contact__mail span {
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .contact__ctas .btn-icon {
+    width: 52px;
+    min-height: 52px;
+  }
+
+  .contact__socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+  }
+  .social {
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--muted);
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      border-color var(--dur-fast) var(--ease-out-expo),
+      background-color var(--dur-fast),
+      box-shadow var(--dur-base) var(--ease-out-expo),
+      transform 300ms var(--ease-out-expo);
+  }
+  .social svg {
+    width: 24px;
+    height: 24px;
+  }
+  .social:hover,
+  .social:focus-visible {
+    color: var(--brand);
+    border-color: color-mix(in srgb, var(--brand) 50%, var(--border-strong));
+    background: color-mix(in srgb, var(--brand) 8%, var(--surface-2));
+    box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--brand) 60%, transparent);
+  }
+
+  @media (width < 420px) {
+    .contact__socials {
+      gap: 0.6rem;
+    }
+    .social {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+    }
+  }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 60;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--ok) 40%, var(--border-strong));
+    background: var(--surface-2);
+    color: var(--ok);
+    font-size: 0.85rem;
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 12px);
+    transition:
+      opacity var(--dur-base) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo);
+  }
+  .toast:empty {
+    visibility: hidden;
+  }
+  .toast[data-show] {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+</style>

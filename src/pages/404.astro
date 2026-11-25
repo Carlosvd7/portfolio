@@ -1,0 +1,66 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useT, homePath } from '../i18n/utils';
+
+const t = useT('es');
+const en = useT('en');
+---
+
+<BaseLayout title={`${t.notFound.title} · Carlos Velázquez`} alternates={false}>
+  <section class="nf container-x" aria-labelledby="nf-title">
+    <p class="nf__code font-tech" aria-hidden="true">
+      <span class="text-accent-2">~/</span>{t.notFound.code}<span class="caret text-accent">_</span>
+    </p>
+    <h1 id="nf-title" class="nf__title">{t.notFound.title}</h1>
+    <p class="nf__text">{t.notFound.text}</p>
+    <p class="nf__text nf__text--en" lang="en">{en.notFound.text}</p>
+    <div class="nf__ctas">
+      <a href={homePath('es')} class="btn btn-primary">
+        <Icon name="lucide:arrow-left" aria-hidden="true" />
+        {t.notFound.back}
+      </a>
+      <a href={homePath('en')} class="btn" lang="en" hreflang="en">
+        <Icon name="lucide:languages" aria-hidden="true" />
+        {en.notFound.back}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: calc(80svh - var(--header-h));
+    padding-block: 4rem;
+  }
+  .nf__code {
+    font-size: clamp(64px, 14vw, 140px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: var(--text-strong);
+  }
+  .nf__title {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+  .nf__text {
+    margin-top: 0.75rem;
+    max-width: 52ch;
+    color: var(--muted);
+  }
+  .nf__text--en {
+    margin-top: 0.25rem;
+    font-size: 0.92rem;
+  }
+  .nf__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+</style>

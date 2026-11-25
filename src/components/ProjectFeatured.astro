@@ -1,0 +1,203 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import TechChip from './TechChip.astro';
+import { useT, type Lang } from '../i18n/utils';
+import { rich } from '../i18n/format';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const { data } = project;
+const t = useT(lang);
+const titleId = `project-${project.id}`;
+---
+
+<article class="featured card" aria-labelledby={titleId} data-reveal data-spotlight>
+  <div class="featured__media">
+    {
+      data.image ? (
+        <Picture
+          src={data.image}
+          alt={data.imageAlt?.[lang] ?? ''}
+          formats={['avif', 'webp']}
+          widths={[480, 720, 960, 1280]}
+          sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span class="featured__placeholder" aria-hidden="true">
+          <Icon name={data.icon} />
+        </span>
+      )
+    }
+  </div>
+
+  <div class="featured__body">
+    <p class="featured__label font-tech">
+      {data.status === 'live' && (
+        <span class="live">
+          <span class="status-dot" aria-hidden="true" />
+          {t.projects.live}
+        </span>
+      )}
+      <span>{data.label[lang]}</span>
+    </p>
+    <h3 id={titleId} class="featured__title">{data.title[lang]}</h3>
+    <p class="featured__desc" set:html={rich(data.description[lang])} />
+
+    <ul class="featured__chips" role="list">
+      {
+        data.tech.map((id) => (
+          <li>
+            <TechChip name={id} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="featured__links">
+      {
+        data.links.live && (
+          <a href={data.links.live} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <Icon name="lucide:globe" aria-hidden="true" />
+            {t.projects.visit}
+            <Icon name="lucide:arrow-up-right" aria-hidden="true" data-nudge="up-right" />
+            <span class="sr-only">{t.a11y.newTab}</span>
+          </a>
+        )
+      }
+      {
+        data.links.repo && (
+          <a href={data.links.repo} class="btn" target="_blank" rel="noopener noreferrer">
+            <Icon name="simple-icons:github" aria-hidden="true" data-brand="github" />
+            {t.projects.code}
+            <span class="sr-only">{t.a11y.newTab}</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .featured {
+    display: grid;
+    overflow: hidden;
+    transition: border-color var(--dur-base) var(--ease-out-expo);
+  }
+  .featured:hover {
+    border-color: var(--border-strong);
+  }
+  @media (width >= 900px) {
+    .featured {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    }
+  }
+
+  .featured__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  @media (width >= 900px) {
+    .featured__media {
+      aspect-ratio: auto;
+      min-height: 360px;
+      border-bottom: 0;
+      border-right: 1px solid var(--border);
+    }
+    .featured__media :global(picture) {
+      position: absolute;
+      inset: 0;
+    }
+  }
+  .featured__media :global(picture),
+  .featured__media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .featured__media :global(img) {
+    object-fit: cover;
+    object-position: top left;
+    transform: scale(1.001);
+    transition: transform 700ms var(--ease-out-expo);
+  }
+  .featured:hover .featured__media :global(img) {
+    transform: scale(1.04);
+  }
+  .featured__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgb(9 9 13 / 0.55));
+    pointer-events: none;
+  }
+  .featured__placeholder {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: var(--subtle);
+  }
+
+  .featured__body {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+  }
+  .featured__label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+    background: color-mix(in srgb, var(--ok) 10%, transparent);
+    color: var(--ok);
+    letter-spacing: 0.04em;
+  }
+  .live .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+  .featured__title {
+    margin-top: 1rem;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .featured__desc {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-size: 1.03rem;
+  }
+  .featured__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.4rem;
+  }
+  .featured__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+    padding-top: 1.75rem;
+  }
+</style>

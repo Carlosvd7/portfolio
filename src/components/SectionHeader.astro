@@ -1,0 +1,81 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** Número de sección: 1 → "01" */
+  num: number;
+  /** id del <h2>, para aria-labelledby de la sección */
+  id: string;
+  title: string;
+  icon: string;
+}
+
+const { num, id, title, icon } = Astro.props;
+---
+
+<div class="section-head" data-reveal>
+  <p class="section-head__num font-tech" aria-hidden="true">
+    <Icon name={icon} />
+    <span>{String(num).padStart(2, '0')}</span>
+  </p>
+  <h2 id={id} class="section-head__title">{title}</h2>
+  <span class="section-head__line" aria-hidden="true" data-draw-line></span>
+</div>
+
+<style>
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.75rem;
+  }
+  .section-head__num {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid color-mix(in srgb, var(--accent-2) 35%, var(--border));
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+    color: var(--accent-2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .section-head__num svg {
+    width: 15px;
+    height: 15px;
+  }
+  .section-head__title {
+    font-size: clamp(30px, 4.4vw, 40px);
+    white-space: nowrap;
+  }
+  .section-head__line {
+    flex: 1;
+    height: 1px;
+    min-width: 2rem;
+    background: linear-gradient(90deg, var(--border-strong), color-mix(in srgb, var(--accent-2) 40%, transparent) 30%, transparent);
+    transform-origin: left;
+    transition: transform 900ms var(--ease-out-expo) 150ms;
+  }
+  :global(.js) .section-head__line {
+    transform: scaleX(0);
+  }
+  :global(.js) .is-revealed .section-head__line,
+  :global(.js) .section-head.is-revealed .section-head__line {
+    transform: scaleX(1);
+  }
+
+  @media (width < 520px) {
+    .section-head {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .section-head__title {
+      white-space: normal;
+    }
+    .section-head__line {
+      flex-basis: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import { Icon } from 'astro-icon/components';
+import CodeCard from './CodeCard.astro';
+import Terminal from './Terminal.astro';
+import { site, sectionIds } from '../data/site';
+import { useT, type Lang } from '../i18n/utils';
+import { rich } from '../i18n/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const socials = [
+  { href: site.cv, label: t.hero.ctaCv, icon: 'lucide:file-down', brand: 'cv', download: true },
+  { href: site.links.linkedin, label: 'LinkedIn', icon: 'simple-icons:linkedin', brand: 'linkedin', external: true },
+  { href: site.links.github, label: 'GitHub', icon: 'simple-icons:github', brand: 'github', external: true },
+  { href: `mailto:${site.email}`, label: 'Email', icon: 'lucide:mail', brand: 'email' },
+];
+---
+
+<section class="hero container-x" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <p class="hero__pill font-tech" data-reveal>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span><span class="text-ok">{t.hero.status}</span> · {site.role}</span>
+    </p>
+
+    <h1 id="hero-title" class="hero__title" data-reveal>
+      {t.hero.greeting} <span class="text-accent">{t.hero.name}</span>.
+    </h1>
+
+    <p class="hero__subtitle" data-reveal>{t.hero.subtitle}</p>
+    <p class="hero__intro" data-reveal set:html={rich(t.hero.intro)} />
+
+    <div class="hero__ctas" data-reveal>
+      <a href={`#${sectionIds.experience}`} class="btn btn-primary">
+        {t.hero.ctaExperience}
+        <Icon name="lucide:arrow-down" aria-hidden="true" data-nudge="down" />
+      </a>
+      {
+        socials.map((s) => (
+          <a
+            href={s.href}
+            class="btn"
+            {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            {...(s.download ? { download: '' } : {})}
+          >
+            <Icon name={s.icon} aria-hidden="true" data-brand={s.brand} />
+            {s.label}
+            {s.external && <span class="sr-only">{t.a11y.newTab}</span>}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="hero__visual" data-reveal>
+    <div class="hero__tilt" data-tilt>
+      <CodeCard lang={lang} />
+      <Terminal lang={lang} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding-top: clamp(3rem, 8vw, 5.5rem);
+    padding-bottom: 2.5rem;
+  }
+  @media (width >= 1024px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 3.5rem;
+      min-height: min(calc(88svh - var(--header-h)), 820px);
+    }
+  }
+
+  .hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 75%, transparent);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .hero__title {
+    margin-top: 1.5rem;
+    font-size: clamp(48px, 6.6vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .hero__subtitle {
+    margin-top: 1.5rem;
+    max-width: 34ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--text-strong);
+  }
+
+  .hero__intro {
+    margin-top: 1rem;
+    max-width: 56ch;
+    font-size: 1.0625rem;
+    color: var(--muted);
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .hero__visual {
+    perspective: 1200px;
+  }
+  .hero__tilt {
+    display: grid;
+    gap: 0.9rem;
+    transform-style: preserve-3d;
+    transition: transform 400ms var(--ease-out-expo);
+    will-change: transform;
+  }
+</style>

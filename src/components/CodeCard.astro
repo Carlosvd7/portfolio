@@ -1,0 +1,171 @@
+---
+/**
+ * Tarjeta de editor con el perfil escrito en Python.
+ * Resaltado de sintaxis hecho a mano con tokens (sin librería ni estilos en línea).
+ */
+import { Icon } from 'astro-icon/components';
+import type { Lang } from '../i18n/utils';
+import { useT } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+type Tok = [cls: 'v' | 'p' | 'c' | 'k' | 's' | 'o', text: string];
+
+const words = {
+  es: {
+    file: 'perfil.py',
+    cls: 'Ingeniero',
+    keys: ['rol', 'foco', 'stack', 'base'],
+    focus: ['IA generativa', 'Machine Learning', 'Datos'],
+  },
+  en: {
+    file: 'profile.py',
+    cls: 'Engineer',
+    keys: ['role', 'focus', 'stack', 'base'],
+    focus: ['Generative AI', 'Machine Learning', 'Data'],
+  },
+}[lang];
+
+const list = (items: string[]): Tok[] =>
+  items.flatMap((it, i) => [['s', `"${it}"`] as Tok, ...(i < items.length - 1 ? [['p', ', '] as Tok] : [])]);
+
+const lines: Tok[][] = [
+  [['v', 'carlos'], ['o', ' = '], ['c', words.cls], ['p', '(']],
+  [['p', '    '], ['k', words.keys[0]!], ['o', '='], ['s', '"AI & Software Engineer"'], ['p', ',']],
+  [['p', '    '], ['k', words.keys[1]!], ['o', '='], ['p', '['], ...list(words.focus), ['p', '],']],
+  [['p', '    '], ['k', words.keys[2]!], ['o', '='], ['p', '['], ...list(['Python', 'TensorFlow', 'SQL', 'TypeScript']), ['p', '],']],
+  [['p', '    '], ['k', words.keys[3]!], ['o', '='], ['s', '"Salamanca → Madrid"'], ['p', ',']],
+  [['p', ')']],
+];
+---
+
+<figure class="code-card card" aria-label={t.hero.codeLabel} data-spotlight>
+  <div class="code-card__bar">
+    <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="code-card__file font-tech">
+      <Icon name="simple-icons:python" aria-hidden="true" />
+      {words.file}
+    </span>
+    <span class="code-card__meta font-tech" aria-hidden="true">Python 3.12</span>
+  </div>
+  <pre class="code-card__pre font-tech"><code>{
+    lines.map((line, i) => (
+      <span class="ln"><span class="ln__n" aria-hidden="true">{i + 1}</span>{line.map(([c, text]) => <span class={`t-${c}`}>{text}</span>)}{'\n'}</span>
+    ))
+  }</code></pre>
+</figure>
+
+<style>
+  .code-card {
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    box-shadow:
+      0 30px 60px -30px rgb(0 0 0 / 0.8),
+      0 0 0 1px rgb(255 255 255 / 0.02) inset;
+  }
+  .code-card__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-2) 60%, transparent);
+  }
+  .code-card__dots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .code-card__dots i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #ff5f57;
+    opacity: 0.85;
+  }
+  .code-card__dots i:nth-child(2) {
+    background: #febc2e;
+  }
+  .code-card__dots i:nth-child(3) {
+    background: #28c840;
+  }
+  .code-card__file {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.78rem;
+  }
+  .code-card__file svg {
+    width: 13px;
+    height: 13px;
+    color: #ffd43b;
+  }
+  .code-card__meta {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .code-card__pre {
+    margin: 0;
+    padding: 1.1rem 1.1rem 1.25rem 0.4rem;
+    font-size: 12px;
+    line-height: 1.85;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+  }
+  .ln {
+    display: block;
+    padding-left: 2.6em;
+    text-indent: -2.6em;
+  }
+  .ln__n {
+    display: inline-block;
+    width: 2.6em;
+    padding-right: 1em;
+    text-indent: 0;
+    text-align: right;
+    color: var(--subtle);
+    user-select: none;
+  }
+  @media (width >= 420px) {
+    .code-card__pre {
+      font-size: 13px;
+    }
+  }
+  @media (width >= 1024px) {
+    .code-card__pre {
+      font-size: 13.5px;
+    }
+  }
+
+  /* Tokens */
+  .t-v {
+    color: var(--text-strong);
+  }
+  .t-o {
+    color: #ff8fa3;
+  }
+  .t-c {
+    color: #b8aeff;
+  }
+  .t-k {
+    color: #7fc8ff;
+  }
+  .t-s {
+    color: #ffcf87;
+  }
+  .t-p {
+    color: var(--muted);
+  }
+</style>

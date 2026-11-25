@@ -63,6 +63,7 @@ const es = {
     code: 'Código',
     demoSoon: 'Demo en vídeo próximamente',
     more: 'Más proyectos en GitHub',
+    moreHint: 'Entre otros, Mapas interactivos con Angular, Node.js, MongoDB y Google Maps API.',
   },
   stack: {
     techCount: '{n} tecnologías',

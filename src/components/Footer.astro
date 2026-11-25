@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import { useT, homePath, otherLang, languages, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const other = otherLang(lang);
+---
+
+<footer class="footer">
+  <div class="container-x footer__inner font-tech">
+    <p class="footer__copy">
+      © 2026 {site.name}{' '}<span aria-hidden="true">·</span>{' '}{t.footer.builtWith}
+    </p>
+    <ul class="footer__links" role="list">
+      <li>
+        <a href="#main" class="footer__link">
+          <Icon name="lucide:arrow-up" aria-hidden="true" class="footer__up" />
+          {t.footer.backToTop}
+        </a>
+      </li>
+      <li>
+        <a href={homePath(other)} class="footer__link" hreflang={other} lang={other} data-lang-link>
+          <Icon name="lucide:languages" aria-hidden="true" />
+          {languages[other]}
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-block: 1.75rem 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footer__links {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    color: var(--muted);
+    transition: color var(--dur-fast);
+  }
+  .footer__link svg {
+    width: 15px;
+    height: 15px;
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+  .footer__link:hover {
+    color: var(--text-strong);
+  }
+  .footer__link:hover .footer__up {
+    transform: translateY(-2px);
+  }
+</style>

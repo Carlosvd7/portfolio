@@ -65,6 +65,7 @@ const en: Dict = {
     code: 'Code',
     demoSoon: 'Video demo coming soon',
     more: 'More projects on GitHub',
+    moreHint: 'Including Interactive Maps, built with Angular, Node.js, MongoDB and the Google Maps API.',
   },
   stack: {
     techCount: '{n} technologies',

@@ -1,0 +1,101 @@
+---
+import { Icon } from 'astro-icon/components';
+import { useT, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+
+<div class="ask container-x" data-reveal>
+  <button type="button" class="ask__bar" data-palette-open="ai" aria-haspopup="dialog">
+    <span class="kbd ask__kbd" aria-hidden="true"><span data-mod-key>Ctrl</span> K</span>
+    <span class="ask__text">{t.ask.label}</span>
+    <span class="ask__soon font-tech">{t.ask.soon}</span>
+    <span class="ask__icon" aria-hidden="true">
+      <Icon name="lucide:sparkles" />
+    </span>
+  </button>
+</div>
+
+<style>
+  .ask {
+    display: flex;
+    justify-content: center;
+    padding-block: 1rem 3.5rem;
+  }
+  .ask__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: min(100%, 560px);
+    min-height: 56px;
+    padding: 0.45rem 0.45rem 0.45rem 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--accent-2) 40%, var(--border-strong));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--accent-2) 6%, transparent),
+      0 12px 50px -12px color-mix(in srgb, var(--accent-2) 55%, transparent);
+    transition:
+      transform var(--dur-base) var(--ease-out-expo),
+      box-shadow var(--dur-base) var(--ease-out-expo),
+      border-color var(--dur-fast);
+  }
+  .ask__bar:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--accent-2) 70%, var(--border-strong));
+    box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--accent-2) 10%, transparent),
+      0 16px 60px -10px color-mix(in srgb, var(--accent-2) 70%, transparent);
+  }
+  .ask__bar:focus-visible {
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+  .ask__kbd {
+    display: none;
+  }
+  .ask__text {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .ask__soon {
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    font-size: 0.68rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ask__icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    color: #0e0a24;
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+  .ask__icon svg {
+    width: 19px;
+    height: 19px;
+  }
+  .ask__bar:hover .ask__icon {
+    transform: rotate(-12deg) scale(1.06);
+  }
+  @media (width >= 520px) {
+    .ask__kbd {
+      display: inline-flex;
+    }
+  }
+</style>

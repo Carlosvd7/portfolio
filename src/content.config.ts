@@ -66,8 +66,12 @@ const projects = defineCollection({
           repo: z.url().optional(),
         })
         .default({}),
+      /** Icono Lucide para la cabecera de la tarjeta. */
+      icon: z.string().startsWith('lucide:').default('lucide:folder-code'),
       image: image().optional(),
       imageAlt: L.optional(),
+      /** Hueco reservado para un GIF/vídeo de demo que aún no existe. */
+      demoPending: z.boolean().default(false),
     }),
 });
 

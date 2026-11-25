@@ -8,6 +8,7 @@ import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-gr
 import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getLang, useT, homePath, htmlLang, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -64,7 +65,7 @@ const alt = (l: Lang) => new URL(homePath(l), Astro.site).href;
       <slot />
     </main>
 
-    <slot name="footer" />
+    <Footer lang={lang} />
   </body>
 </html>
 
