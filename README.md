@@ -24,7 +24,6 @@ npm run dev        # http://localhost:4321 con recarga en caliente
 | `npm run build` | Genera la web en `dist/` (incluye imágenes OG, sitemap y robots.txt) |
 | `npm run preview` | Sirve `dist/` tal como quedará en producción |
 | `npm run check` | Comprueba los tipos (`astro check`) y el contraste de color (WCAG AA) |
-| `npm run cv:placeholder` | Regenera el PDF provisional del CV |
 | `./scripts/lighthouse.ps1` | Lighthouse en móvil y escritorio contra un `npm run preview` en marcha (`-Base http://localhost:4321`) |
 
 ---
@@ -146,7 +145,7 @@ src/
                 pointer · copy · palette · assistant · env
   styles/       global.css (tokens, utilidades, animaciones, reduced motion)
 public/         favicon.svg · cv/
-scripts/        check-contrast.mjs · lighthouse.ps1 · make-cv-placeholder.mjs
+scripts/        check-contrast.mjs · lighthouse.ps1
 netlify.toml
 ```
 
@@ -155,7 +154,7 @@ netlify.toml
 ## Pendiente de Carlos
 
 - [x] **URL de LinkedIn** en `src/data/site.ts` (`links.linkedin`).
-- [ ] **CV real** en PDF: sustituir `public/cv/Carlos-Velazquez-CV.pdf` (mismo nombre). El actual es provisional.
+- [x] **CV real** en `public/cv/Carlos-Velazquez-CV.pdf` (versión pública, sin DNI, fecha de nacimiento ni dirección). Para actualizarlo, sustituye el archivo con el mismo nombre. Ojo: los PDF de Europass llevan incrustado un `attachment.xml` con los datos del formulario; exporta siempre desde un perfil sin datos sensibles.
 - [ ] **Logos** de NTT DATA, UCM y UPSA (opcional): guardarlos en `src/assets/logos/` y descomentar la línea `logo:` de cada YAML. Ahora se muestran sus iniciales.
 - [ ] **GIF o vídeo de la demo** de lengua de signos: `src/assets/projects/` y añadir `image:` en `lengua-de-signos.yaml` (quitar `demoPending`).
 - [ ] **Enlaces de verificación** de las credenciales: rellenar `verifyUrl` en cada archivo de `src/content/credentials/`.
