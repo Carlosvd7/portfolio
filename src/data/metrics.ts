@@ -39,10 +39,10 @@ export const metrics: Metric[] = [
   },
   {
     icon: 'lucide:award',
-    value: 7,
+    value: 10,
     text: {
-      es: 'credenciales de IA (Databricks ×2 · Anthropic · OpenAI ×3 · Google)',
-      en: 'AI credentials (Databricks ×2 · Anthropic · OpenAI ×3 · Google)',
+      es: 'credenciales de IA (Anthropic ×4 · OpenAI ×3 · Databricks ×2 · Google)',
+      en: 'AI credentials (Anthropic ×4 · OpenAI ×3 · Databricks ×2 · Google)',
     },
   },
 ];

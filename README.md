@@ -157,7 +157,8 @@ netlify.toml
 - [x] **CV real** en `public/cv/Carlos-Velazquez-CV.pdf` (versión pública, sin DNI, fecha de nacimiento ni dirección). Para actualizarlo, sustituye el archivo con el mismo nombre. Ojo: los PDF de Europass llevan incrustado un `attachment.xml` con los datos del formulario; exporta siempre desde un perfil sin datos sensibles.
 - [ ] **Logos** de NTT DATA, UCM y UPSA (opcional): guardarlos en `src/assets/logos/` y descomentar la línea `logo:` de cada YAML. Ahora se muestran sus iniciales.
 - [ ] **GIF o vídeo de la demo** de lengua de signos: `src/assets/projects/` y añadir `image:` en `lengua-de-signos.yaml` (quitar `demoPending`).
-- [ ] **Enlaces de verificación** de las credenciales: rellenar `verifyUrl` en cada archivo de `src/content/credentials/`.
+- [x] **Credenciales** con imagen oficial (`src/assets/credentials/`) y enlace de verificación, sacadas de LinkedIn.
+- [ ] **Databricks · Generative AI Fundamentals**: no aparece en LinkedIn; falta su enlace de verificación e imagen (`databricks-genai.yaml`).
 - [ ] **Repo de calculaCasa:** si lo haces público, añadir `repo:` en `calculacasa.yaml` y aparecerá el botón "Código".
 - [ ] **Identidad de Git:** tus commits salen como `DESKTOP-EBDJR8J\Carlos Manuel <Carlos Manuel>` y GitHub no los asocia a tu perfil. Arréglalo con `git config --global user.name "Carlos Manuel Velázquez"` y `git config --global user.email "<email de tu cuenta de GitHub>"`.
 - [ ] **Fase 2:** asistente de IA (ver sección anterior).
