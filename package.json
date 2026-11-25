@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check && node scripts/check-contrast.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
+    "badges:glow": "node scripts/badge-glow.mjs",
     "astro": "astro"
   },
   "dependencies": {

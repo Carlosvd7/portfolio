@@ -24,6 +24,7 @@ npm run dev        # http://localhost:4321 con recarga en caliente
 | `npm run build` | Genera la web en `dist/` (incluye imágenes OG, sitemap y robots.txt) |
 | `npm run preview` | Sirve `dist/` tal como quedará en producción |
 | `npm run check` | Comprueba los tipos (`astro check`) y el contraste de color (WCAG AA) |
+| `npm run badges:glow` | Calcula el color del aura de cada credencial a partir de su imagen (ejecútalo al añadir una insignia) |
 | `./scripts/lighthouse.ps1` | Lighthouse en móvil y escritorio contra un `npm run preview` en marcha (`-Base http://localhost:4321`) |
 
 ---

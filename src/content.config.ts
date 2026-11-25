@@ -88,8 +88,12 @@ const credentials = defineCollection({
       note: L.optional(),
       /** Imagen de la insignia o del certificado (src/assets/credentials/). Sin ella se muestra el logo del emisor. */
       image: image().optional(),
+      /** Color del aura detrás de la insignia. Lo calcula `npm run badges:glow` a partir de la imagen. */
+      glow: z.string().regex(/^#[0-9A-Fa-f]{6}$/).optional(),
       /** Vacío = no se muestra el enlace "Verificar". */
       verifyUrl: z.union([z.url(), z.literal('')]).default(''),
+      /** true = no se publica (p. ej. credencial aún no emitida). */
+      draft: z.boolean().default(false),
     }),
 });
 
