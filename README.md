@@ -89,10 +89,10 @@ A partir de aquí, **cada `git push` a `main` despliega automáticamente**.
 
 ### 3. Poner un nombre bonito
 
-- **Subdominio gratuito:** *Site configuration → Change site name* → `carlosvelazquez` → la web queda en `https://carlosvelazquez.netlify.app` (es la URL que ya está configurada en `astro.config.mjs`).
-- **Dominio propio** (p. ej. `carlosvelazquez.dev`): *Domain management → Add a domain*, sigue las instrucciones de DNS y cambia `SITE` en `astro.config.mjs`. Netlify activa HTTPS solo.
+- **Subdominio gratuito:** *Site configuration → Change site name* → `carlosmanuelvelazquez` → la web queda en `https://carlosmanuelvelazquez.netlify.app` (es la URL que ya está configurada en `astro.config.mjs`).
+- **Dominio propio** (p. ej. `carlosmanuelvelazquez.dev`): *Domain management → Add a domain*, sigue las instrucciones de DNS y cambia `SITE` en `astro.config.mjs`. Netlify activa HTTPS solo.
 
-> Si el subdominio `carlosvelazquez` ya está cogido, elige otro y actualiza `SITE` en `astro.config.mjs`: de él dependen la URL canónica, el sitemap, el `hreflang` y la imagen de Open Graph.
+> Si el subdominio `carlosmanuelvelazquez` ya está cogido, elige otro y actualiza `SITE` en `astro.config.mjs`: de él dependen la URL canónica, el sitemap, el `hreflang` y la imagen de Open Graph.
 
 ### 4. Comprobar y enlazar desde LinkedIn
 

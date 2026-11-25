@@ -8,7 +8,7 @@ const lines = [
   ['F1', 11, ''],
   ['F1', 11, 'CV en preparacion / CV coming soon.'],
   ['F1', 11, 'Contacto / Contact: carlosmavd2003@gmail.com'],
-  ['F1', 11, 'Web: https://carlosvelazquez.netlify.app'],
+  ['F1', 11, 'Web: https://carlosmanuelvelazquez.netlify.app'],
 ];
 
 let y = 760;

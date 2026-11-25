@@ -4,8 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 
-// Cambia esta URL si conectas un dominio propio (p. ej. https://carlosvelazquez.dev)
-const SITE = 'https://carlosvelazquez.netlify.app';
+// Cambia esta URL si conectas un dominio propio (p. ej. https://carlosmanuelvelazquez.dev)
+const SITE = 'https://carlosmanuelvelazquez.netlify.app';
 
 export default defineConfig({
   site: SITE,
