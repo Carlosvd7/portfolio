@@ -87,6 +87,8 @@ const stackLearning = stack.filter((g) => g.data.learning);
 <style>
   .section {
     padding-block: clamp(3.5rem, 8vw, 6rem);
+    /* Nota: se probó content-visibility:auto para aligerar el render inicial, pero hace que
+       el primer salto por ancla (menú, paleta) aterrice desplazado. Descartado a propósito. */
   }
 
   .projects {
