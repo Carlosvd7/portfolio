@@ -10,6 +10,7 @@ import { initTyping } from './typing';
 import { initTimeline } from './timeline';
 import { initPointerEffects } from './pointer';
 import { initCopyButtons } from './copy';
+import { initCarousels } from './carousel';
 
 initHeader();
 initReveal();
@@ -19,3 +20,4 @@ initTyping();
 initSpotlight();
 initPointerEffects();
 initCopyButtons();
+initCarousels();

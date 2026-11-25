@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { navItems } from '../data/site';
+import { navItems, site } from '../data/site';
 import { useT, homePath, otherLang, languages, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -17,7 +17,7 @@ const other = otherLang(lang);
 <header class="site-header" data-header>
   <div class="container-x site-header__inner">
     <a href={home} class="logo font-tech" aria-label={t.a11y.home}>
-      <span class="text-accent-2" aria-hidden="true">~/</span><span aria-hidden="true">carlos.velazquez</span><span
+      <span class="text-accent-2" aria-hidden="true">~/</span><span aria-hidden="true">{site.handle}</span><span
         class="caret text-accent"
         aria-hidden="true">_</span
       >
@@ -93,7 +93,7 @@ const other = otherLang(lang);
 <dialog id="mobile-menu" class="mobile-menu" aria-label={t.a11y.mainNav}>
   <div class="mobile-menu__top">
     <span class="logo font-tech" aria-hidden="true"
-      ><span class="text-accent-2">~/</span>carlos.velazquez<span class="text-accent">_</span></span
+      ><span class="text-accent-2">~/</span>{site.handle}<span class="text-accent">_</span></span
     >
     <button type="button" class="menu-toggle" data-menu-close aria-label={t.a11y.closeMenu}>
       <Icon name="lucide:x" aria-hidden="true" />
@@ -157,6 +157,13 @@ const other = otherLang(lang);
   }
   .site-header__inner > .logo {
     flex-shrink: 1;
+  }
+  /* ~/carlos.manuel.velazquez_ entero en móviles de 360px */
+  @media (width < 420px) {
+    .logo {
+      font-size: 0.8rem;
+      letter-spacing: -0.03em;
+    }
   }
 
   /* ---------- Navegación escritorio ---------- */

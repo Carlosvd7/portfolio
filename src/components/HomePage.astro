@@ -14,7 +14,7 @@ import Timeline from './Timeline.astro';
 import ProjectFeatured from './ProjectFeatured.astro';
 import ProjectCard from './ProjectCard.astro';
 import StackGroup from './StackGroup.astro';
-import CredentialCard from './CredentialCard.astro';
+import Credentials from './Credentials.astro';
 import Contact from './Contact.astro';
 import { site, sectionIds } from '../data/site';
 import { getLang, useT } from '../i18n/utils';
@@ -23,10 +23,9 @@ const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
 
 const byOrder = <T extends { data: { order: number } }>(a: T, b: T) => a.data.order - b.data.order;
-const [projects, stack, credentials] = await Promise.all([
+const [projects, stack] = await Promise.all([
   getCollection('projects').then((p) => p.sort(byOrder)),
   getCollection('stack').then((s) => s.sort(byOrder)),
-  getCollection('credentials').then((c) => c.sort(byOrder)),
 ]);
 const featured = projects.filter((p) => p.data.featured);
 const others = projects.filter((p) => !p.data.featured);
@@ -79,9 +78,7 @@ const stackLearning = stack.filter((g) => g.data.learning);
 
   <section id={sectionIds.credentials} class="section container-x" aria-labelledby="credentials-title">
     <SectionHeader num={4} id="credentials-title" title={t.sections.credentials} icon="lucide:badge-check" />
-    <ul class="creds" role="list">
-      {credentials.map((c) => <CredentialCard credential={c} lang={lang} />)}
-    </ul>
+    <Credentials lang={lang} labelledBy="credentials-title" />
   </section>
 
   <Contact lang={lang} />
@@ -133,11 +130,5 @@ const stackLearning = stack.filter((g) => g.data.learning);
   }
   .stack__learning {
     margin-top: 1.25rem;
-  }
-
-  .creds {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
 </style>

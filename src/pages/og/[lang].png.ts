@@ -71,7 +71,7 @@ export const GET: APIRoute = async ({ params }) => {
       h('div', { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '64px 0 60px 72px', width: 700 }, [
         h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 26, color: C.strong }, [
           h('span', { color: C.violet }, '~/'),
-          h('span', {}, 'carlos.velazquez'),
+          h('span', {}, site.handle),
           h('span', { color: C.accent }, '_'),
         ]),
         h('div', { display: 'flex', flexDirection: 'column' }, [

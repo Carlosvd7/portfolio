@@ -77,17 +77,20 @@ const projects = defineCollection({
 
 const credentials = defineCollection({
   loader: yaml('credentials'),
-  schema: z.object({
-    order: z.number().int(),
-    kind: z.enum(['certificate', 'language']).default('certificate'),
-    issuer: tech,
-    issuerName: z.string().optional(),
-    name: L,
-    date: YM.optional(),
-    note: L.optional(),
-    /** Vacío = no se muestra el enlace "Verificar". */
-    verifyUrl: z.union([z.url(), z.literal('')]).default(''),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      order: z.number().int(),
+      kind: z.enum(['certificate', 'language']).default('certificate'),
+      issuer: tech,
+      issuerName: z.string().optional(),
+      name: L,
+      date: YM.optional(),
+      note: L.optional(),
+      /** Imagen de la insignia o del certificado (src/assets/credentials/). Sin ella se muestra el logo del emisor. */
+      image: image().optional(),
+      /** Vacío = no se muestra el enlace "Verificar". */
+      verifyUrl: z.union([z.url(), z.literal('')]).default(''),
+    }),
 });
 
 const stack = defineCollection({

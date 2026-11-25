@@ -74,6 +74,34 @@ const RAW = {
 export type TechId = keyof typeof RAW;
 export const techIds = Object.keys(RAW) as [TechId, ...TechId[]];
 
+/**
+ * Logos oficiales a todo color (set `logos` de Iconify) para los tiles del stack.
+ * Solo marcas cuyo logo se lee bien sobre fondo oscuro; el resto usa `icon` en su color de marca.
+ */
+const COLOR_LOGOS: Partial<Record<TechId, string>> = {
+  python: 'logos:python',
+  tensorflow: 'logos:tensorflow',
+  pandas: 'logos:pandas-icon',
+  numpy: 'logos:numpy',
+  postgresql: 'logos:postgresql',
+  mongodb: 'logos:mongodb-icon',
+  powerbi: 'logos:microsoft-power-bi',
+  typescript: 'logos:typescript-icon',
+  javascript: 'logos:javascript',
+  nuxt: 'logos:nuxt-icon',
+  vue: 'logos:vue',
+  angular: 'logos:angular-icon',
+  nodejs: 'logos:nodejs-icon',
+  java: 'logos:java',
+  quarkus: 'logos:quarkus-icon',
+  docker: 'logos:docker-icon',
+  tailwindcss: 'logos:tailwindcss-icon',
+  googlemaps: 'logos:google-maps',
+  git: 'logos:git-icon',
+  netlify: 'logos:netlify-icon',
+  google: 'logos:google-icon',
+};
+
 /* ---------- Contraste: colores demasiado oscuros pasan a --text-strong ---------- */
 const SURFACE = '#111118';
 const MIN_CONTRAST = 3; // WCAG 1.4.11 para gráficos y componentes de interfaz
@@ -97,7 +125,7 @@ export function displayColor(hex: string): string {
   return contrast(hex, SURFACE) >= MIN_CONTRAST ? hex : 'var(--text-strong)';
 }
 
-export function getTech(id: TechId): TechDef & { display: string } {
+export function getTech(id: TechId): TechDef & { display: string; logo?: string } {
   const t = RAW[id];
-  return { ...t, display: displayColor(t.color) };
+  return { ...t, display: displayColor(t.color), logo: COLOR_LOGOS[id] };
 }

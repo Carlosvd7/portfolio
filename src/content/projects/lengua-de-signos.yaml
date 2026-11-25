@@ -1,17 +1,17 @@
 order: 2
 title:
-  es: Lengua de signos a texto
-  en: Sign language to text
+  es: Sistema de reconocimiento de lengua de signos española
+  en: Spanish Sign Language recognition system
 label:
   es: Machine Learning · TFG
   en: Machine Learning · Final-year project
 description:
-  es: Detección de gestos en tiempo real, de la captura de datos al modelo en vivo.
-  en: Real-time gesture detection, from data capture to a live model.
+  es: Modelo predictivo que reconoce **palabras y letras en tiempo real**, implementado en una **web con Angular**.
+  en: A predictive model that recognises **words and letters in real time**, deployed in an **Angular web app**.
 status: done
 icon: lucide:hand
 demoPending: true
-tech: [python, tensorflow, mediapipe, angular]
+tech: [python, tensorflow, numpy, pandas, mediapipe, angular]
 links:
   repo: https://github.com/Carlosvd7/reconocimiento-senas
 # image: ../../assets/projects/lengua-de-signos.gif   # Pendiente de Carlos: GIF de la demo

@@ -7,6 +7,8 @@ export const site = {
   name: 'Carlos Manuel Velázquez Diego',
   /** Nombre profesional (nombre compuesto + primer apellido): títulos y marca. */
   shortName: 'Carlos Manuel Velázquez',
+  /** Identificador estilo terminal del logo: ~/carlos.manuel.velazquez_ */
+  handle: 'carlos.manuel.velazquez',
   role: 'AI & Software Engineer',
   email: 'carlosmavd2003@gmail.com',
   cv: '/cv/Carlos-Velazquez-CV.pdf',

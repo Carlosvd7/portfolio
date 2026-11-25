@@ -28,7 +28,7 @@ const en: Dict = {
   hero: {
     status: 'Available',
     greeting: "Hi, I'm",
-    name: 'Carlos',
+    name: 'Carlos Manuel',
     subtitle: 'I turn data into products: Machine Learning models, generative AI and websites that ship to production.',
     intro:
       'Computer engineer (UPSA) with experience at **NTT DATA**. In 2027 I start the **Master’s in Big Data, Data Science & AI** at UCM.',
@@ -74,6 +74,12 @@ const en: Dict = {
   credentials: {
     verify: 'Verify',
     languages: 'Languages',
+    carousel: 'carousel',
+    slide: 'slide',
+    trackLabel: 'Credentials (use ← → arrows to scroll)',
+    prev: 'Previous credential',
+    next: 'Next credential',
+    badgeOf: 'Badge for',
   },
   contact: {
     title: 'Shall we build something together?',

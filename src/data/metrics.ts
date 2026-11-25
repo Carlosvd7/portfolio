@@ -22,10 +22,10 @@ export const metrics: Metric[] = [
   },
   {
     icon: 'lucide:file-search',
-    value: 43,
+    value: 130,
     text: {
-      es: 'páginas indexadas en un producto propio',
-      en: 'indexed pages on a product I built',
+      es: 'URLs indexadas en Google en un producto propio',
+      en: 'URLs indexed by Google on a product I built',
     },
   },
   {

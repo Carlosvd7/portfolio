@@ -26,7 +26,7 @@ const es = {
   hero: {
     status: 'Disponible',
     greeting: 'Hola, soy',
-    name: 'Carlos',
+    name: 'Carlos Manuel',
     subtitle: 'Convierto datos en productos: modelos de Machine Learning, IA generativa y webs que llegan a producción.',
     intro:
       'Ingeniero informático (UPSA) con experiencia en **NTT DATA**. En 2027 empiezo el **Máster en Big Data, Data Science e IA** de la UCM.',
@@ -72,6 +72,12 @@ const es = {
   credentials: {
     verify: 'Verificar',
     languages: 'Idiomas',
+    carousel: 'carrusel',
+    slide: 'diapositiva',
+    trackLabel: 'Credenciales (usa las flechas ← → para desplazarte)',
+    prev: 'Credencial anterior',
+    next: 'Credencial siguiente',
+    badgeOf: 'Insignia de',
   },
   contact: {
     title: '¿Construimos algo juntos?',
