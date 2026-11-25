@@ -16,11 +16,12 @@ const other = otherLang(lang);
 
 <header class="site-header" data-header>
   <div class="container-x site-header__inner">
-    <a href={home} class="logo font-tech" aria-label={t.a11y.home}>
-      <span class="text-accent-2" aria-hidden="true">~/</span><span aria-hidden="true">{site.handle}</span><span
+    <!-- Nombre accesible = texto visible + "inicio" (control por voz: "pulsa carlos.manuel.velazquez") -->
+    <a href={home} class="logo font-tech">
+      <span class="text-accent-2" aria-hidden="true">~/</span><span>{site.handle}</span><span
         class="caret text-accent"
         aria-hidden="true">_</span
-      >
+      ><span class="sr-only">, {t.a11y.homeShort}</span>
     </a>
 
     <nav class="nav-desktop" aria-label={t.a11y.mainNav}>
@@ -59,9 +60,9 @@ const other = otherLang(lang);
                   hreflang={l}
                   lang={l}
                   data-lang-link
-                  aria-label={languages[l]}
                 >
                   {l.toUpperCase()}
+                  <span class="sr-only">· {languages[l]}</span>
                 </a>
               )}
             </>
@@ -69,11 +70,10 @@ const other = otherLang(lang);
         }
       </div>
 
-      <button type="button" class="palette-trigger" data-palette-open aria-label={t.a11y.openPalette} aria-haspopup="dialog">
+      <button type="button" class="palette-trigger" data-palette-open aria-haspopup="dialog">
         <Icon name="lucide:command" class="palette-trigger__icon" aria-hidden="true" />
-        <span class="palette-trigger__keys font-tech" aria-hidden="true"
-          ><span data-mod-key>Ctrl</span> K</span
-        >
+        <span class="sr-only">{t.a11y.openPalette}</span>
+        <span class="palette-trigger__keys font-tech"><span data-mod-key>Ctrl</span> K</span>
       </button>
 
       <button

@@ -8,6 +8,7 @@ const es = {
   a11y: {
     skip: 'Saltar al contenido',
     home: 'Inicio, Carlos Manuel Velázquez',
+    homeShort: 'inicio',
     mainNav: 'Navegación principal',
     openMenu: 'Abrir menú',
     closeMenu: 'Cerrar menú',

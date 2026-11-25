@@ -10,6 +10,7 @@ const en: Dict = {
   a11y: {
     skip: 'Skip to content',
     home: 'Home, Carlos Manuel Velázquez',
+    homeShort: 'home',
     mainNav: 'Main navigation',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
