@@ -1,0 +1,12 @@
+order: 3
+title:
+  es: Asistente IA de vivienda
+  en: AI housing assistant
+label:
+  es: IA generativa · En desarrollo
+  en: Generative AI · In development
+description:
+  es: RAG sobre normativa de vivienda, agente que usa las calculadoras vía MCP y evaluación con LLM-as-judge.
+  en: RAG over housing regulations, an agent that uses the calculators through MCP, and LLM-as-judge evaluation.
+status: in-progress
+tech: [python, anthropic, rag, mcp]

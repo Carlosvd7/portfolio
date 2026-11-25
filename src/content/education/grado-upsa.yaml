@@ -1,0 +1,15 @@
+order: 3
+title:
+  es: Grado en Ingeniería Informática
+  en: BSc in Computer Engineering
+institution: Universidad Pontificia de Salamanca
+initials: UPSA
+# logo: ../../assets/logos/upsa.svg   # Pendiente de Carlos
+url: https://www.upsa.es
+location: Salamanca
+start: '2021'
+end: '2025'
+description:
+  es: Mención en **Ingeniería del Software**. TFG de **visión artificial con TensorFlow**.
+  en: Major in **Software Engineering**. Final-year project on **computer vision with TensorFlow**.
+tech: [python, tensorflow]

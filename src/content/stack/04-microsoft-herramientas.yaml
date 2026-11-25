@@ -1,0 +1,6 @@
+order: 4
+icon: lucide:wrench
+title:
+  es: Microsoft y herramientas
+  en: Microsoft & tooling
+items: [powerapps, powerautomate, dataverse, sharepoint, git, github, netlify]

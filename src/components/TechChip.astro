@@ -1,0 +1,163 @@
+---
+/**
+ * Tecnología con su logo. Lee icono, color y nombre de `src/data/tech.ts`.
+ *  - variant="chip": icono + nombre (líneas de tiempo, proyectos).
+ *  - variant="tile": logo con tooltip (rejilla del stack). Enfocable con teclado;
+ *    en pantallas táctiles el nombre se muestra siempre bajo el logo.
+ * En reposo es monocromo; con hover/foco toma su color de marca, se eleva y brilla.
+ */
+import { Icon } from 'astro-icon/components';
+import { getTech, type TechId } from '../data/tech';
+
+interface Props {
+  name: TechId;
+  variant?: 'chip' | 'tile';
+  class?: string;
+}
+
+const { name, variant = 'chip', class: className } = Astro.props;
+const tech = getTech(name);
+---
+
+{
+  variant === 'chip' ? (
+    <span class:list={['tech-chip', className]} data-brand={name}>
+      <Icon name={tech.icon} aria-hidden="true" />
+      <span>{tech.label}</span>
+    </span>
+  ) : (
+    <span class:list={['tech-tile', className]} data-brand={name} tabindex="0" role="img" aria-label={tech.label}>
+      <Icon name={tech.icon} aria-hidden="true" />
+      <span class="tech-tile__name" aria-hidden="true">
+        {tech.label}
+      </span>
+      <span class="tech-tile__tip font-tech" aria-hidden="true">
+        {tech.label}
+      </span>
+    </span>
+  )
+}
+
+<style>
+  /* ---------- Chip ---------- */
+  .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: var(--muted);
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      border-color var(--dur-fast) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo);
+  }
+  .tech-chip svg {
+    width: 14px;
+    height: 14px;
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      filter var(--dur-base) var(--ease-out-expo);
+  }
+  .tech-chip:hover {
+    color: var(--text-strong);
+    border-color: color-mix(in srgb, var(--brand) 45%, var(--border));
+    transform: translateY(-2px);
+  }
+  .tech-chip:hover svg {
+    color: var(--brand);
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--brand) 60%, transparent));
+  }
+
+  /* ---------- Tile ---------- */
+  .tech-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 64px;
+    padding: 0.75rem 0.25rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    color: var(--muted);
+    cursor: default;
+    outline-offset: 2px;
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      background-color var(--dur-fast) var(--ease-out-expo),
+      border-color var(--dur-fast) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo);
+  }
+  .tech-tile svg {
+    width: 28px;
+    height: 28px;
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      filter var(--dur-base) var(--ease-out-expo);
+  }
+  .tech-tile__name {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .tech-tile__tip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    z-index: 5;
+    padding: 0.3rem 0.55rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--text-strong);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity var(--dur-fast) var(--ease-out-expo),
+      transform var(--dur-fast) var(--ease-out-expo);
+  }
+  .tech-tile:hover,
+  .tech-tile:focus-visible {
+    color: var(--text-strong);
+    background: color-mix(in srgb, var(--brand) 8%, transparent);
+    border-color: color-mix(in srgb, var(--brand) 30%, transparent);
+    transform: translateY(-2px);
+  }
+  .tech-tile:hover svg,
+  .tech-tile:focus-visible svg {
+    color: var(--brand);
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 55%, transparent));
+  }
+  .tech-tile:hover .tech-tile__tip,
+  .tech-tile:focus-visible .tech-tile__tip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Con ratón: logo limpio y nombre en tooltip. En táctil: nombre siempre visible. */
+  @media (hover: hover) and (pointer: fine) {
+    .tech-tile__name {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  }
+  @media (hover: none) {
+    .tech-tile__tip {
+      display: none;
+    }
+  }
+</style>

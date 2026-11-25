@@ -1,0 +1,6 @@
+order: 3
+icon: lucide:code
+title:
+  es: Web y backend
+  en: Web & backend
+items: [typescript, javascript, astro, nuxt, vue, angular, nodejs, java, quarkus, django, docker, tailwindcss]

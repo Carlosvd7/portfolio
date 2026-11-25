@@ -1,0 +1,6 @@
+order: 2
+icon: lucide:database
+title:
+  es: Datos
+  en: Data
+items: [sql, postgresql, mongodb, powerbi, databricks]

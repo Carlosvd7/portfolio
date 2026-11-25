@@ -16,6 +16,15 @@ export const site = {
   },
 } as const;
 
+/** Ids de ancla de cada sección (iguales en ES y EN). */
+export const sectionIds = {
+  experience: 'experiencia',
+  projects: 'proyectos',
+  stack: 'stack',
+  credentials: 'credenciales',
+  contact: 'contacto',
+} as const;
+
 /** Secciones navegables (id del ancla + clave de traducción + icono Lucide). */
 export const navItems = [
   { id: 'experiencia', key: 'experience', icon: 'lucide:briefcase' },

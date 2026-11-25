@@ -1,0 +1,20 @@
+order: 1
+featured: true
+title:
+  es: calculaCasa.com
+  en: calculaCasa.com
+label:
+  es: Producto propio · En producción
+  en: Own product · In production
+description:
+  es: Hub de calculadoras para el hogar con fórmulas reales y arquitectura declarativa. **43 páginas indexadas** y **top 10 en Google en dos semanas**.
+  en: A hub of home calculators built on real formulas and a declarative architecture. **43 indexed pages** and **Google top 10 within two weeks**.
+status: live
+tech: [nuxt, typescript, tailwindcss, netlify]
+links:
+  live: https://calculacasa.com
+  # repo: el repositorio es privado; añade la URL si lo haces público
+image: ../../assets/projects/calculacasa.webp
+imageAlt:
+  es: 'Portada de calculaCasa.com: «Calcula lo que necesitas antes de decidir», buscador de calculadoras y verticales de energía solar, pintura y suelos'
+  en: 'calculaCasa.com home page: headline, calculator search and the solar energy, paint and flooring sections'

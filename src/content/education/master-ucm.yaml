@@ -1,0 +1,11 @@
+order: 2
+title:
+  es: Máster en Big Data, Data Science e IA
+  en: Master's in Big Data, Data Science & AI
+institution: Universidad Complutense de Madrid
+initials: UCM
+# logo: ../../assets/logos/ucm.svg   # Pendiente de Carlos
+url: https://www.ucm.es
+location: Madrid
+start: 2027-02
+upcoming: true

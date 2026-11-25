@@ -1,0 +1,6 @@
+order: 1
+icon: lucide:brain
+title:
+  es: IA y Machine Learning
+  en: AI & Machine Learning
+items: [python, tensorflow, pandas, scikitlearn, numpy, anthropic, openai, mcp]

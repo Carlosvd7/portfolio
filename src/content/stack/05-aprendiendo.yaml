@@ -1,0 +1,7 @@
+order: 5
+icon: lucide:sprout
+learning: true
+title:
+  es: Aprendiendo ahora
+  en: Currently learning
+items: [langgraph, embeddings, lightgbm, kaggle]

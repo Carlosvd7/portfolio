@@ -1,0 +1,22 @@
+# Experiencia profesional. Usa **texto** para resaltar frases clave.
+order: 1
+role:
+  es: Desarrollador Power Platform (prácticas)
+  en: Power Platform Developer (Internship)
+company: NTT DATA
+initials: NTT
+# logo: ../../assets/logos/ntt-data.svg   # Pendiente de Carlos
+url: https://www.nttdata.com
+location: Salamanca
+start: 2026-02
+end: 2026-08
+bullets:
+  es:
+    - Aplicaciones empresariales con Power Apps, Power Automate, Dataverse y SharePoint para clientes de **banca y telecomunicaciones**.
+    - Automatización de procesos, integración de datos y lógica de negocio con Power Fx.
+    - Modelado de datos en Dataverse y documentación de QA con **más de 270 casos de prueba**.
+  en:
+    - Enterprise applications with Power Apps, Power Automate, Dataverse and SharePoint for **banking and telecom** clients.
+    - Process automation, data integration and business logic with Power Fx.
+    - Data modelling in Dataverse and QA documentation with **270+ test cases**.
+tech: [powerapps, powerautomate, dataverse, sharepoint, powerfx]

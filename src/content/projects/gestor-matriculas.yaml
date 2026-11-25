@@ -1,0 +1,14 @@
+order: 4
+title:
+  es: Gestor de matrículas
+  en: Enrollment manager
+label:
+  es: Backend · Microservicios
+  en: Backend · Microservices
+description:
+  es: Arquitectura distribuida para gestionar alumnos, expedientes y matrículas.
+  en: Distributed architecture to manage students, academic records and enrollments.
+status: done
+tech: [java, quarkus, docker, postgresql]
+links:
+  repo: https://github.com/Carlosvd7/matriculas-alumnos

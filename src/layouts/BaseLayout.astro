@@ -47,6 +47,7 @@ const alt = (l: Lang) => new URL(homePath(l), Astro.site).href;
     <link rel="preload" href={spaceGroteskLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="stylesheet" href="/brands.css" />
     <slot name="head" />
   </head>
   <body>
