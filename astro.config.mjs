@@ -23,12 +23,13 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
     }),
   ],
-  // No usamos bloques de código Markdown; Shiki es incompatible con la CSP.
+  // No usamos bloques de código Markdown.
   markdown: { syntaxHighlight: false },
-  // CSP con hashes generados en build (meta). netlify.toml añade la cabecera con el resto
-  // de directivas (default-src, frame-ancestors…), que solo funcionan como cabecera HTTP.
-  security: { csp: true },
-  // Todo el CSS como archivo externo: ningún <style> en línea que la cabecera CSP tenga que permitir.
+  // La CSP vive solo en la cabecera de netlify.toml. No usamos la <meta> con hashes de Astro
+  // porque bloquearía el distintivo que Netlify inyecta en el plan gratuito (scripts en línea
+  // dentro de un iframe srcdoc, que hereda la política de la página).
+  security: { csp: false },
+  // Nuestro propio CSS siempre como archivo externo: la web no depende de nada en línea.
   build: { inlineStylesheets: 'never' },
   vite: {
     plugins: [tailwindcss()],

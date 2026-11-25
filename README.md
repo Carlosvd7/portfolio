@@ -106,7 +106,7 @@ A partir de aquí, **cada `git push` a `main` despliega automáticamente**.
 
 ## Seguridad y rendimiento
 
-- **CSP doble:** Astro genera una `<meta>` con los hashes de scripts y estilos; `netlify.toml` añade la cabecera con `default-src 'self'`, `frame-ancestors 'none'`, etc. No hay scripts ni estilos en línea.
+- **CSP por cabecera** (`netlify.toml`): todo se carga desde el propio dominio, `frame-ancestors 'none'`, `object-src 'none'`… Nuestro código no usa ningún script ni estilo en línea. La política permite `'unsafe-inline'`, fuentes `data:` y el formulario hacia `app.netlify.com` **solo porque Netlify inyecta su distintivo obligatorio del plan gratuito**; si un día no hace falta (plan de pago o dominio sin distintivo), el comentario de `netlify.toml` indica la versión estricta.
 - Los colores de marca de cada tecnología salen de `/brands.css` (generado en build) para no usar atributos `style` en el HTML.
 - Cabeceras: `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `HSTS`, `X-Frame-Options`, y caché inmutable de 1 año para `/_astro/*`.
 - Privacidad: la web no muestra teléfono, dirección, DNI ni fecha de nacimiento.

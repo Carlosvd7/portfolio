@@ -11,14 +11,17 @@
 
 # ---------------------------------------------------------------------------
 # Cabeceras de seguridad para todo el sitio
-# La CSP de scripts/estilos con hashes la genera Astro como <meta>; esta cabecera
-# añade las directivas que solo funcionan por HTTP. Ambas se aplican a la vez.
+# Todo lo nuestro se carga desde el propio dominio ('self'). Las únicas excepciones son
+# las que necesita el distintivo que Netlify inyecta en el plan gratuito (iframe srcdoc):
+#   'unsafe-inline' en script-src/style-src, fuentes data: y su formulario hacia app.netlify.com.
+# Si pasas a un plan sin distintivo o a dominio propio sin él, vuelve a la versión estricta:
+#   script-src 'self'; style-src 'self'; font-src 'self'; form-action 'self'
 # Fase 2 (asistente IA): connect-src 'self' ya permite llamar a /.netlify/functions/ask
 # ---------------------------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://app.netlify.com; frame-ancestors 'none'; upgrade-insecure-requests"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
