@@ -1,0 +1,389 @@
+---
+import { Icon } from 'astro-icon/components';
+import { navItems } from '../data/site';
+import { useT, homePath, otherLang, languages, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const home = homePath(lang);
+const langs = Object.keys(languages) as Lang[];
+const other = otherLang(lang);
+---
+
+<header class="site-header" data-header>
+  <div class="container-x site-header__inner">
+    <a href={home} class="logo font-tech" aria-label={t.a11y.home}>
+      <span class="text-accent-2" aria-hidden="true">~/</span><span aria-hidden="true">carlos.velazquez</span><span
+        class="caret text-accent"
+        aria-hidden="true">_</span
+      >
+    </a>
+
+    <nav class="nav-desktop" aria-label={t.a11y.mainNav}>
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={`${home}#${item.id}`} class="nav-link" data-nav-link={item.id}>
+                <Icon name={item.icon} aria-hidden="true" />
+                <span>{t.nav[item.key]}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <div class="lang-switch font-tech" role="group" aria-label={t.a11y.langSwitch}>
+        {
+          langs.map((l, i) => (
+            <>
+              {i > 0 && (
+                <span class="lang-switch__sep" aria-hidden="true">
+                  |
+                </span>
+              )}
+              {l === lang ? (
+                <span class="lang-switch__item is-current" aria-current="true" lang={l}>
+                  {l.toUpperCase()}
+                </span>
+              ) : (
+                <a
+                  href={homePath(l)}
+                  class="lang-switch__item"
+                  hreflang={l}
+                  lang={l}
+                  data-lang-link
+                  aria-label={languages[l]}
+                >
+                  {l.toUpperCase()}
+                </a>
+              )}
+            </>
+          ))
+        }
+      </div>
+
+      <button type="button" class="palette-trigger" data-palette-open aria-label={t.a11y.openPalette} aria-haspopup="dialog">
+        <Icon name="lucide:command" class="palette-trigger__icon" aria-hidden="true" />
+        <span class="palette-trigger__keys font-tech" aria-hidden="true"
+          ><span data-mod-key>Ctrl</span> K</span
+        >
+      </button>
+
+      <button
+        type="button"
+        class="menu-toggle"
+        data-menu-open
+        aria-label={t.a11y.openMenu}
+        aria-haspopup="dialog"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="lucide:menu" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="mobile-menu" class="mobile-menu" aria-label={t.a11y.mainNav}>
+  <div class="mobile-menu__top">
+    <span class="logo font-tech" aria-hidden="true"
+      ><span class="text-accent-2">~/</span>carlos.velazquez<span class="text-accent">_</span></span
+    >
+    <button type="button" class="menu-toggle" data-menu-close aria-label={t.a11y.closeMenu}>
+      <Icon name="lucide:x" aria-hidden="true" />
+    </button>
+  </div>
+  <nav aria-label={t.a11y.mainNav}>
+    <ul class="mobile-menu__list">
+      {
+        navItems.map((item, i) => (
+          <li>
+            <a href={`${home}#${item.id}`} class="mobile-menu__link" data-menu-link>
+              <span class="font-tech text-accent-2 text-sm">{String(i + 1).padStart(2, '0')}</span>
+              <Icon name={item.icon} aria-hidden="true" />
+              <span>{t.nav[item.key]}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <a href={homePath(other)} class="btn mobile-menu__lang" hreflang={other} lang={other} data-lang-link>
+    <Icon name="lucide:languages" aria-hidden="true" />
+    {languages[other]}
+  </a>
+</dialog>
+
+<script>
+  import { initHeader } from '../scripts/header';
+  initHeader();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    height: var(--header-h);
+    background: rgb(9 9 13 / 0.75);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow var(--dur-base) var(--ease-out-expo);
+  }
+  .site-header[data-scrolled] {
+    box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.7);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  /* ---------- Navegación escritorio ---------- */
+  .nav-desktop {
+    display: none;
+  }
+  .nav-desktop ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0 0.75rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color var(--dur-fast) var(--ease-out-expo);
+  }
+  .nav-link svg {
+    width: 15px;
+    height: 15px;
+    transition: transform var(--dur-base) var(--ease-out-expo), color var(--dur-fast);
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 8px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+  .nav-link:hover {
+    color: var(--text-strong);
+  }
+  .nav-link:hover svg {
+    transform: translateY(-1px);
+  }
+  .nav-link[aria-current='true'] {
+    color: var(--text-strong);
+  }
+  .nav-link[aria-current='true'] svg {
+    color: var(--accent);
+  }
+  .nav-link[aria-current='true']::after,
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+  .nav-link:hover:not([aria-current='true'])::after {
+    opacity: 0.45;
+  }
+
+  /* ---------- Acciones ---------- */
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lang-switch {
+    display: none;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+  .lang-switch__item {
+    display: inline-grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    color: var(--muted);
+    transition: color var(--dur-fast);
+  }
+  a.lang-switch__item:hover {
+    color: var(--text-strong);
+  }
+  .lang-switch__item.is-current {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .lang-switch__sep {
+    color: var(--border-strong);
+  }
+
+  .palette-trigger,
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition:
+      color var(--dur-fast),
+      border-color var(--dur-fast),
+      transform var(--dur-fast) var(--ease-out-expo),
+      background-color var(--dur-fast);
+  }
+  .palette-trigger:hover,
+  .menu-toggle:hover {
+    color: var(--text-strong);
+    border-color: color-mix(in srgb, var(--accent-2) 60%, var(--border-strong));
+    background: var(--surface-2);
+    transform: translateY(-1px);
+  }
+  .palette-trigger svg,
+  .menu-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+  .palette-trigger__keys {
+    display: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  @media (width >= 640px) {
+    .lang-switch {
+      display: flex;
+    }
+    .palette-trigger {
+      padding: 0 0.7rem;
+    }
+    .palette-trigger__keys {
+      display: inline;
+    }
+    .palette-trigger__icon {
+      width: 15px !important;
+      height: 15px !important;
+      color: var(--accent-2);
+    }
+  }
+
+  @media (width >= 900px) {
+    .nav-desktop {
+      display: block;
+    }
+    .menu-toggle {
+      display: none;
+    }
+  }
+
+  /* ---------- Menú móvil (dialog nativo) ---------- */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0 20px 28px;
+    border: 0;
+    background: rgb(9 9 13 / 0.96);
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--dur-base) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo),
+      overlay var(--dur-base) allow-discrete,
+      display var(--dur-base) allow-discrete;
+  }
+  .mobile-menu[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @starting-style {
+    .mobile-menu[open] {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+  .mobile-menu::backdrop {
+    background: transparent;
+  }
+  .mobile-menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu__list {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1.25rem;
+  }
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 60px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
+  }
+  .mobile-menu__link svg {
+    width: 22px;
+    height: 22px;
+    color: var(--muted);
+    transition: color var(--dur-fast), transform var(--dur-base) var(--ease-out-expo);
+  }
+  .mobile-menu__link:hover svg,
+  .mobile-menu__link:focus-visible svg {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+  .mobile-menu__lang {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+</style>

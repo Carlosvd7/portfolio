@@ -1,0 +1,91 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/space-grotesk/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../styles/global.css';
+
+import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+import Header from '../components/Header.astro';
+import { getLang, useT, homePath, htmlLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Las páginas sin traducción (404) no emiten hreflang. */
+  alternates?: boolean;
+}
+
+const lang: Lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const { title = t.meta.title, description = t.meta.description, alternates = true } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alt = (l: Lang) => new URL(homePath(l), Astro.site).href;
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {
+      alternates && (
+        <>
+          <link rel="alternate" hreflang="es" href={alt('es')} />
+          <link rel="alternate" hreflang="en" href={alt('en')} />
+          <link rel="alternate" hreflang="x-default" href={alt('es')} />
+        </>
+      )
+    }
+    <meta name="theme-color" content="#09090D" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={spaceGroteskLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{t.a11y.skip}</a>
+
+    <div class="site-bg" aria-hidden="true">
+      <span class="site-bg__glow site-bg__glow--violet"></span>
+      <span class="site-bg__glow site-bg__glow--amber"></span>
+    </div>
+
+    <Header lang={lang} />
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: #1a1204;
+    font-weight: 600;
+    transform: translateY(-160%);
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline-color: var(--text-strong);
+  }
+  main:focus {
+    outline: none;
+  }
+</style>

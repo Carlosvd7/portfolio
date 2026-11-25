@@ -1,0 +1,29 @@
+---
+/**
+ * Página de inicio compartida por /es y /en.
+ * Fase 1: estructura mínima. Las secciones reales llegan en la fase 3.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { navItems } from '../data/site';
+import { getLang, useT } from '../i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+---
+
+<BaseLayout>
+  <section class="container-x py-24" aria-labelledby="hero-title">
+    <h1 id="hero-title" class="text-[clamp(48px,6.6vw,84px)]">
+      {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <span class="text-accent">Carlos.</span>
+    </h1>
+  </section>
+  {
+    navItems.map((item) => (
+      <section id={item.id} class="container-x min-h-[70vh] py-24" aria-labelledby={`${item.id}-title`}>
+        <h2 id={`${item.id}-title`} class="text-[40px]">
+          {t.nav[item.key]}
+        </h2>
+      </section>
+    ))
+  }
+</BaseLayout>
