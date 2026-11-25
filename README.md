@@ -154,7 +154,7 @@ netlify.toml
 
 ## Pendiente de Carlos
 
-- [ ] **URL de LinkedIn** en `src/data/site.ts` (`links.linkedin`). Mientras sea el valor provisional, los botones de LinkedIn no llevan a tu perfil y no se incluye en los datos para Google.
+- [x] **URL de LinkedIn** en `src/data/site.ts` (`links.linkedin`).
 - [ ] **CV real** en PDF: sustituir `public/cv/Carlos-Velazquez-CV.pdf` (mismo nombre). El actual es provisional.
 - [ ] **Logos** de NTT DATA, UCM y UPSA (opcional): guardarlos en `src/assets/logos/` y descomentar la línea `logo:` de cada YAML. Ahora se muestran sus iniciales.
 - [ ] **GIF o vídeo de la demo** de lengua de signos: `src/assets/projects/` y añadir `image:` en `lengua-de-signos.yaml` (quitar `demoPending`).

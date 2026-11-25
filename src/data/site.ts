@@ -12,8 +12,7 @@ export const site = {
   cv: '/cv/Carlos-Velazquez-CV.pdf',
   links: {
     github: 'https://github.com/Carlosvd7',
-    // TODO (Carlos): pon aquí la URL real de tu perfil de LinkedIn
-    linkedin: 'https://www.linkedin.com/in/',
+    linkedin: 'https://www.linkedin.com/in/carlos-manuel-velazquez-diego-2483a2354/',
     calculacasa: 'https://calculacasa.com',
   },
 } as const;
