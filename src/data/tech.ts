@@ -25,6 +25,8 @@ const RAW = {
   openai: { icon: 'simple-icons:openai', color: '#412991', label: 'OpenAI' },
   mcp: { icon: 'simple-icons:modelcontextprotocol', color: '#000000', label: 'MCP' },
   mediapipe: { icon: 'simple-icons:mediapipe', color: '#0097A7', label: 'MediaPipe' },
+  opencv: { icon: 'simple-icons:opencv', color: '#5C3EE8', label: 'OpenCV' },
+  flask: { icon: 'simple-icons:flask', color: '#3BABC3', label: 'Flask' },
   rag: { icon: 'lucide:file-search', color: '#8B7CFF', label: 'RAG' },
   langgraph: { icon: 'simple-icons:langgraph', color: '#7FC8FF', label: 'LangGraph' },
   embeddings: { icon: 'lucide:waypoints', color: '#8B7CFF', label: 'Embeddings' },

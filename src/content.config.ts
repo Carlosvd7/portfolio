@@ -45,6 +45,8 @@ const education = defineCollection({
       end: YM.optional(),
       upcoming: z.boolean().default(false),
       description: L.optional(),
+      /** Viñetas con lo más destacado (TFG, proyectos…). Admiten **resaltados**. */
+      bullets: LList.optional(),
       tech: z.array(tech).default([]),
     }),
 });

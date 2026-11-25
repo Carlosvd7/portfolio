@@ -10,7 +10,13 @@ url: https://www.upsa.es
 location: Salamanca
 start: '2021'
 end: '2026'
-description:
-  es: Mención en **Ingeniería del Software**. TFG de **visión artificial con TensorFlow**.
-  en: Major in **Software Engineering**. Final-year project on **computer vision with TensorFlow**.
-tech: [python, tensorflow]
+bullets:
+  es:
+    - Mención en **Ingeniería del Software**.
+    - '**TFG · Reconocimiento de lengua de signos española en tiempo real:** dataset propio grabado y etiquetado a mano, puntos clave de las manos con MediaPipe y tres modelos en TensorFlow/Keras: red densa para letras (81 %), LSTM bidireccional para palabras (**93 % de precisión**) y LSTM para frases con dos manos (91 %). API en Flask y web en Angular, con un enfoque de accesibilidad e inclusión educativa.'
+    - Proyectos durante la carrera con Java y Quarkus (microservicios), Django, Angular con Node.js y MongoDB, y diseño de interfaces en Interacción Persona-Ordenador.
+  en:
+    - Major in **Software Engineering**.
+    - "**Final-year project · Real-time Spanish Sign Language recognition:** a self-recorded, hand-labelled dataset, hand keypoints with MediaPipe and three TensorFlow/Keras models: a dense network for letters (81%), a bidirectional LSTM for words (**93% accuracy**) and an LSTM for two-handed phrases (91%). Flask API and Angular web app, focused on accessibility and inclusive education."
+    - Coursework projects with Java and Quarkus (microservices), Django, Angular with Node.js and MongoDB, and interface design in Human-Computer Interaction.
+tech: [python, tensorflow, mediapipe, angular, java, django]

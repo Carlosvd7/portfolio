@@ -6,12 +6,12 @@ label:
   es: Machine Learning · TFG
   en: Machine Learning · Final-year project
 description:
-  es: Modelo predictivo que reconoce **palabras y letras en tiempo real**, implementado en una **web con Angular**.
-  en: A predictive model that recognises **words and letters in real time**, deployed in an **Angular web app**.
+  es: Modelo predictivo que reconoce **letras, palabras y frases en tiempo real** desde la webcam. Dataset propio y modelos LSTM con hasta un **93 % de precisión**, servidos con Flask en una **web con Angular**.
+  en: A predictive model that recognises **letters, words and phrases in real time** from a webcam. Self-built dataset and LSTM models with up to **93% accuracy**, served with Flask in an **Angular web app**.
 status: done
 icon: lucide:hand
 demoPending: true
-tech: [python, tensorflow, numpy, pandas, mediapipe, angular]
+tech: [python, tensorflow, numpy, pandas, mediapipe, opencv, flask, angular]
 links:
   repo: https://github.com/Carlosvd7/reconocimiento-senas
 # image: ../../assets/projects/lengua-de-signos.gif   # Pendiente de Carlos: GIF de la demo

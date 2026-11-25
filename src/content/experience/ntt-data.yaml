@@ -1,4 +1,5 @@
 # Experiencia profesional. Usa **texto** para resaltar frases clave.
+# Clientes descritos por sector (no por nombre) por confidencialidad.
 order: 2
 role:
   es: Desarrollador Power Platform (prácticas)
@@ -7,16 +8,18 @@ company: NTT DATA
 initials: NTT
 # logo: ../../assets/logos/ntt-data.svg   # Pendiente de Carlos
 url: https://www.nttdata.com
-location: Salamanca
+location: Salamanca · Híbrido
 start: 2026-02
 end: 2026-08
 bullets:
   es:
-    - Aplicaciones empresariales con Power Apps, Power Automate, Dataverse y SharePoint para clientes de **banca y telecomunicaciones**.
-    - Automatización de procesos, integración de datos y lógica de negocio con Power Fx.
-    - Modelado de datos en Dataverse y documentación de QA con **más de 270 casos de prueba**.
+    - '**Telecomunicaciones · gran operadora:** mantenimiento de una app model-driven en el módulo de gestión de permisos: corrección de flujos automatizados, desarrollo y corrección de funciones JavaScript en recursos web y ajustes de formularios.'
+    - '**Banca · entidad financiera líder:** app canvas con Power Fx para la gestión de riesgos y escenarios de riesgo: flujos de alta, baja y modificación, envío automático de correos a clientes y a cada rol de la app, y modelado en Dataverse (tablas, campos y entidades).'
+    - Toda la documentación de QA del proyecto bancario, con **más de 270 casos de prueba**, y un **manual de usuario de 70 páginas** alineado con los funcionales del cliente.
+    - Formación inicial en Microsoft Power Platform y trabajo coordinado con el equipo para repartir y planificar las tareas de cada proyecto.
   en:
-    - Enterprise applications with Power Apps, Power Automate, Dataverse and SharePoint for **banking and telecom** clients.
-    - Process automation, data integration and business logic with Power Fx.
-    - Data modelling in Dataverse and QA documentation with **270+ test cases**.
-tech: [powerapps, powerautomate, dataverse, sharepoint, powerfx]
+    - '**Telecom · major carrier:** maintained a model-driven app in the permissions management module: fixed automated flows, built and fixed JavaScript functions in web resources and adjusted forms.'
+    - '**Banking · leading financial institution:** canvas app with Power Fx to manage risks and risk scenarios: create, delete and update flows, automated emails to clients and to each app role, and Dataverse modelling (tables, fields and entities).'
+    - Wrote all the QA documentation for the banking project, with **270+ test cases**, and a **70-page user manual** aligned with the client's functional specs.
+    - Initial Microsoft Power Platform training, then worked with the project team to split and plan each project's tasks.
+tech: [powerapps, powerautomate, dataverse, sharepoint, powerfx, javascript]

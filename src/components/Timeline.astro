@@ -69,7 +69,7 @@ const entries: Entry[] = [
     end: data.end,
     upcoming: data.upcoming,
     kind: 'edu' as const,
-    bullets: [],
+    bullets: data.bullets?.[lang] ?? [],
     description: data.description?.[lang],
     tech: data.tech,
   })),
