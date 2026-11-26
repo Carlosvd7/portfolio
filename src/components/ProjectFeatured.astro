@@ -85,6 +85,14 @@ const titleId = `project-${project.id}`;
         )
       }
       {
+        data.links.demo && data.demoNote && (
+          <span class="featured__note font-tech">
+            <Icon name="lucide:history" aria-hidden="true" />
+            {data.demoNote[lang]}
+          </span>
+        )
+      }
+      {
         data.links.repo && (
           <a href={data.links.repo} class="btn" target="_blank" rel="noopener noreferrer">
             <Icon name="simple-icons:github" aria-hidden="true" data-brand="github" />
@@ -222,5 +230,20 @@ const titleId = `project-${project.id}`;
     gap: 0.6rem;
     margin-top: auto;
     padding-top: 1.25rem;
+  }
+  /* Aclaración de la demo (p. ej. "repetición de datos reales"), en su propia línea bajo los botones */
+  .featured__note {
+    order: 10;
+    flex-basis: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .featured__note svg {
+    width: 14px;
+    height: 14px;
+    color: var(--accent-2);
   }
 </style>

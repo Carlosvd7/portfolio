@@ -74,6 +74,8 @@ const projects = defineCollection({
       icon: z.string().startsWith('lucide:').default('lucide:folder-code'),
       image: image().optional(),
       imageAlt: L.optional(),
+      /** Aclaración junto al botón de demo (p. ej. "repetición de datos reales"). */
+      demoNote: L.optional(),
       /** Hueco reservado para un GIF/vídeo de demo que aún no existe. */
       demoPending: z.boolean().default(false),
     }),

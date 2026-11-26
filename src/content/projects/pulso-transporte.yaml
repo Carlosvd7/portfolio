@@ -1,5 +1,6 @@
-# Sin demo pública todavía (servidor pendiente) y sin la fase de ML: no se marca como "Live".
-# Cuando haya demo: añade links.demo y cambia status a live.
+# La demo es una REPETICIÓN de datos reales (no en directo): no se marca como "Live".
+# Cuando haya panel en directo (servidor Oracle): cambia links.demo, quita demoNote y pon status: live.
+# Aún sin la fase de ML: no mencionar modelo ni métricas de ML.
 order: 1
 featured: true
 title:
@@ -15,8 +16,12 @@ status: in-progress
 icon: lucide:train-front
 tech: [python, kafka, duckdb, parquet, pydantic, fastapi, leaflet, docker, caddy, pytest]
 links:
+  demo: https://carlosvd7.github.io/pulso-transporte/
   repo: https://github.com/Carlosvd7/pulso-transporte
+demoNote:
+  es: 'Demo: repetición de datos reales del 26 nov 2026, 14:10–16:35'
+  en: 'Demo: replay of real data from 26 Nov 2026, 14:10–16:35'
 image: ../../assets/projects/pulso-transporte.webp
 imageAlt:
-  es: 'Panel en vivo de Pulso del transporte: 741 trenes en circulación, retraso medio, puntualidad, anomalías, mapa de España con los trenes por color de retraso y tabla de líneas'
-  en: 'Transport Pulse live dashboard: 741 trains running, average delay, punctuality, anomalies, a map of Spain with trains coloured by delay and a table of lines'
+  es: 'Panel de Pulso del transporte en modo repetición: 729 trenes en circulación, retraso medio, puntualidad, anomalías, mapa de España con los trenes por color de retraso y tabla de líneas'
+  en: 'Transport Pulse dashboard in replay mode: 729 trains running, average delay, punctuality, anomalies, a map of Spain with trains coloured by delay and a table of lines'
