@@ -106,23 +106,24 @@ const titleId = `project-${project.id}`;
   .featured:hover {
     border-color: var(--border-strong);
   }
+  /* Imagen algo más estrecha y texto más ancho: el texto ocupa menos líneas y la tarjeta es más baja */
   @media (width >= 900px) {
     .featured {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     }
   }
 
   .featured__media {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     background: var(--surface-2);
     border-bottom: 1px solid var(--border);
   }
   @media (width >= 900px) {
     .featured__media {
       aspect-ratio: auto;
-      min-height: 360px;
+      min-height: 280px;
       border-bottom: 0;
       border-right: 1px solid var(--border);
     }
@@ -132,7 +133,7 @@ const titleId = `project-${project.id}`;
     }
     /* Destacado alterno: imagen a la derecha */
     .featured.is-reverse {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     }
     .featured.is-reverse .featured__media {
       order: 2;
@@ -172,7 +173,7 @@ const titleId = `project-${project.id}`;
   .featured__body {
     display: flex;
     flex-direction: column;
-    padding: clamp(1.4rem, 3vw, 2.25rem);
+    padding: clamp(1.25rem, 2.4vw, 1.75rem) clamp(1.25rem, 2.6vw, 2rem);
   }
   .featured__label {
     display: flex;
@@ -200,25 +201,26 @@ const titleId = `project-${project.id}`;
     height: 6px;
   }
   .featured__title {
-    margin-top: 1rem;
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-top: 0.75rem;
+    font-size: clamp(1.5rem, 2.4vw, 1.85rem);
   }
   .featured__desc {
-    margin-top: 0.85rem;
+    margin-top: 0.6rem;
     color: var(--muted);
-    font-size: 1.03rem;
+    font-size: 0.96rem;
+    line-height: 1.6;
   }
   .featured__chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-top: 1.4rem;
+    gap: 0.4rem;
+    margin-top: 1rem;
   }
   .featured__links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
     margin-top: auto;
-    padding-top: 1.75rem;
+    padding-top: 1.25rem;
   }
 </style>
