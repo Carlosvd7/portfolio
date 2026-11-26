@@ -46,7 +46,7 @@ const stackLearning = stack.filter((g) => g.data.learning);
   <section id={sectionIds.projects} class="section container-x" aria-labelledby="projects-title">
     <SectionHeader num={2} id="projects-title" title={t.sections.projects} icon="lucide:folder-git-2" />
     <div class="projects">
-      {featured.map((p) => <ProjectFeatured project={p} lang={lang} />)}
+      {featured.map((p, i) => <ProjectFeatured project={p} lang={lang} reverse={i % 2 === 1} />)}
       <div class="projects__grid">
         {others.map((p) => <ProjectCard project={p} lang={lang} />)}
       </div>

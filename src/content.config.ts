@@ -65,6 +65,8 @@ const projects = defineCollection({
       links: z
         .object({
           live: z.url().optional(),
+          /** Demo pública del proyecto (botón "Ver demo"). */
+          demo: z.url().optional(),
           repo: z.url().optional(),
         })
         .default({}),

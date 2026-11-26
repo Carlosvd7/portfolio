@@ -24,6 +24,8 @@ const RAW = {
   anthropic: { icon: 'simple-icons:anthropic', color: '#191919', label: 'Anthropic' },
   openai: { icon: 'simple-icons:openai', color: '#412991', label: 'OpenAI' },
   mcp: { icon: 'simple-icons:modelcontextprotocol', color: '#000000', label: 'MCP' },
+  claude: { icon: 'simple-icons:claude', color: '#D97757', label: 'Claude API' },
+  sqlglot: { icon: 'lucide:code-xml', color: '#8B7CFF', label: 'sqlglot' }, // sin logo de marca
   mediapipe: { icon: 'simple-icons:mediapipe', color: '#0097A7', label: 'MediaPipe' },
   opencv: { icon: 'simple-icons:opencv', color: '#5C3EE8', label: 'OpenCV' },
   flask: { icon: 'simple-icons:flask', color: '#3BABC3', label: 'Flask' },
@@ -39,6 +41,7 @@ const RAW = {
   mongodb: { icon: 'simple-icons:mongodb', color: '#47A248', label: 'MongoDB' },
   powerbi: { icon: 'simple-icons:powerbi', color: '#F2C811', label: 'Power BI' },
   databricks: { icon: 'simple-icons:databricks', color: '#FF3621', label: 'Databricks' },
+  duckdb: { icon: 'simple-icons:duckdb', color: '#FFF000', label: 'DuckDB' },
 
   // Web y backend
   typescript: { icon: 'simple-icons:typescript', color: '#3178C6', label: 'TypeScript' },
@@ -51,6 +54,8 @@ const RAW = {
   java: { icon: 'simple-icons:openjdk', color: '#F89820', label: 'Java' }, // Java no está en SI: logo OpenJDK + naranja de Java
   quarkus: { icon: 'simple-icons:quarkus', color: '#4695EB', label: 'Quarkus' },
   django: { icon: 'simple-icons:django', color: '#44B78B', label: 'Django' }, // verde oficial (SI: #092E20)
+  fastapi: { icon: 'simple-icons:fastapi', color: '#009688', label: 'FastAPI' },
+  pytest: { icon: 'simple-icons:pytest', color: '#0A9EDC', label: 'pytest' },
   docker: { icon: 'simple-icons:docker', color: '#2496ED', label: 'Docker' },
   tailwindcss: { icon: 'simple-icons:tailwindcss', color: '#06B6D4', label: 'Tailwind CSS' },
   googlemaps: { icon: 'simple-icons:googlemaps', color: '#4285F4', label: 'Google Maps API' },

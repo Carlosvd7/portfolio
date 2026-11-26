@@ -9,15 +9,17 @@ import { rich } from '../i18n/format';
 interface Props {
   project: CollectionEntry<'projects'>;
   lang: Lang;
+  /** Imagen a la derecha (para alternar cuando hay varios destacados). */
+  reverse?: boolean;
 }
 
-const { project, lang } = Astro.props;
+const { project, lang, reverse = false } = Astro.props;
 const { data } = project;
 const t = useT(lang);
 const titleId = `project-${project.id}`;
 ---
 
-<article class="featured card" aria-labelledby={titleId} data-reveal data-spotlight>
+<article class:list={['featured card', { 'is-reverse': reverse }]} aria-labelledby={titleId} data-reveal data-spotlight>
   <div class="featured__media">
     {
       data.image ? (
@@ -73,6 +75,16 @@ const titleId = `project-${project.id}`;
         )
       }
       {
+        data.links.demo && (
+          <a href={data.links.demo} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <Icon name="lucide:play" aria-hidden="true" />
+            {t.projects.demo}
+            <Icon name="lucide:arrow-up-right" aria-hidden="true" data-nudge="up-right" />
+            <span class="sr-only">{t.a11y.newTab}</span>
+          </a>
+        )
+      }
+      {
         data.links.repo && (
           <a href={data.links.repo} class="btn" target="_blank" rel="noopener noreferrer">
             <Icon name="simple-icons:github" aria-hidden="true" data-brand="github" />
@@ -117,6 +129,15 @@ const titleId = `project-${project.id}`;
     .featured__media :global(picture) {
       position: absolute;
       inset: 0;
+    }
+    /* Destacado alterno: imagen a la derecha */
+    .featured.is-reverse {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+    .featured.is-reverse .featured__media {
+      order: 2;
+      border-right: 0;
+      border-left: 1px solid var(--border);
     }
   }
   .featured__media :global(picture),

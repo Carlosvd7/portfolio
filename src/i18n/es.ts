@@ -62,6 +62,7 @@ const es = {
     live: 'Live',
     inProgress: 'En desarrollo',
     visit: 'Visitar web',
+    demo: 'Ver demo',
     code: 'Código',
     demoSoon: 'Demo en vídeo próximamente',
     more: 'Más proyectos en GitHub',

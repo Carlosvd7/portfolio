@@ -1,0 +1,21 @@
+order: 0
+featured: true
+title:
+  es: Habla con los datos públicos de España
+  en: Talk to Spain's public data
+label:
+  es: IA generativa · MCP · Ingeniería de datos
+  en: Generative AI · MCP · Data engineering
+description:
+  es: Agente de IA con un **servidor MCP propio** que responde preguntas sobre paro, población, inflación y precios de carburantes con datos oficiales del INE y del Ministerio, enseñando la consulta SQL y la fuente. Pipeline reproducible a DuckDB, SQL de solo lectura con varias capas de seguridad y evaluación con 40 preguntas, con un **100 % de respuestas correctas** y un 88 % de precisión por ejecución, a unos 0,001 $ por pregunta.
+  en: An AI agent with its **own MCP server** that answers questions about Spanish unemployment, population, inflation and fuel prices using official open data, showing the SQL and the source. Reproducible DuckDB pipeline, read-only SQL with defence in depth, and a 40-question evaluation with **100% correct answers** and 88% execution accuracy, at about $0.001 per question.
+status: live
+icon: lucide:database-search
+tech: [python, mcp, claude, duckdb, sqlglot, fastapi, docker, pytest]
+links:
+  demo: https://carlosvd7.github.io/datos-abiertos-mcp/
+  repo: https://github.com/Carlosvd7/datos-abiertos-mcp
+image: ../../assets/projects/datos-abiertos-mcp.webp
+imageAlt:
+  es: 'Demo de «Habla con los datos públicos de España»: cuadro para preguntar y ejemplos sobre paro, inflación, carburantes y población'
+  en: 'Demo of "Talk to Spain''s public data": a question box and sample questions about unemployment, inflation, fuel prices and population'

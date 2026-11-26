@@ -64,6 +64,7 @@ const en: Dict = {
     live: 'Live',
     inProgress: 'In development',
     visit: 'Visit site',
+    demo: 'View demo',
     code: 'Code',
     demoSoon: 'Video demo coming soon',
     more: 'More projects on GitHub',

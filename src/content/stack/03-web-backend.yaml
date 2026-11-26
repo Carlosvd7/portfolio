@@ -3,4 +3,4 @@ icon: lucide:code
 title:
   es: Web y backend
   en: Web & backend
-items: [typescript, javascript, astro, nuxt, vue, angular, nodejs, java, quarkus, django, docker, tailwindcss]
+items: [typescript, javascript, astro, nuxt, vue, angular, nodejs, java, quarkus, django, fastapi, docker, tailwindcss]

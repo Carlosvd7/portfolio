@@ -3,4 +3,4 @@ icon: lucide:database
 title:
   es: Datos
   en: Data
-items: [sql, postgresql, mongodb, powerbi, databricks]
+items: [sql, postgresql, duckdb, mongodb, powerbi, databricks]
