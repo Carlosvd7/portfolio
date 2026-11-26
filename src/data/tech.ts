@@ -42,6 +42,9 @@ const RAW = {
   powerbi: { icon: 'simple-icons:powerbi', color: '#F2C811', label: 'Power BI' },
   databricks: { icon: 'simple-icons:databricks', color: '#FF3621', label: 'Databricks' },
   duckdb: { icon: 'simple-icons:duckdb', color: '#FFF000', label: 'DuckDB' },
+  kafka: { icon: 'simple-icons:apachekafka', color: '#231F20', label: 'Redpanda / Kafka' },
+  parquet: { icon: 'simple-icons:apacheparquet', color: '#50ABF1', label: 'Parquet' },
+  pydantic: { icon: 'simple-icons:pydantic', color: '#E92063', label: 'Pydantic' },
 
   // Web y backend
   typescript: { icon: 'simple-icons:typescript', color: '#3178C6', label: 'TypeScript' },
@@ -56,6 +59,8 @@ const RAW = {
   django: { icon: 'simple-icons:django', color: '#44B78B', label: 'Django' }, // verde oficial (SI: #092E20)
   fastapi: { icon: 'simple-icons:fastapi', color: '#009688', label: 'FastAPI' },
   pytest: { icon: 'simple-icons:pytest', color: '#0A9EDC', label: 'pytest' },
+  leaflet: { icon: 'simple-icons:leaflet', color: '#199900', label: 'Leaflet' },
+  caddy: { icon: 'simple-icons:caddy', color: '#1F88C0', label: 'Caddy' },
   docker: { icon: 'simple-icons:docker', color: '#2496ED', label: 'Docker' },
   tailwindcss: { icon: 'simple-icons:tailwindcss', color: '#06B6D4', label: 'Tailwind CSS' },
   googlemaps: { icon: 'simple-icons:googlemaps', color: '#4285F4', label: 'Google Maps API' },

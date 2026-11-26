@@ -1,0 +1,22 @@
+# Sin demo pública todavía (servidor pendiente) y sin la fase de ML: no se marca como "Live".
+# Cuando haya demo: añade links.demo y cambia status a live.
+order: 1
+featured: true
+title:
+  es: Pulso del transporte
+  en: Transport Pulse
+label:
+  es: Ingeniería de datos · Streaming en tiempo real
+  en: Data engineering · Real-time streaming
+description:
+  es: Tubería de datos en tiempo real sobre el GTFS-Realtime abierto de Renfe (Cercanías y AV/LD) con ingesta continua cada 30 s, bus de eventos Redpanda (Kafka), contratos de calidad con cola de rechazados, procesamiento en streaming con ventanas por tiempo de evento y detección de anomalías (picos de retraso, cancelaciones, trenes detenidos), y un panel web en vivo con mapa. Detecta y corrige problemas reales del feed, como **1.193 retrasos con un desfase de ±24 h** en una sola noche, y sigue en directo **unos 700 trenes a la vez** en hora punta.
+  en: Real-time data pipeline on Renfe's open GTFS-Realtime feeds (commuter and long-distance rail) with 30-second ingestion, a Redpanda (Kafka) event bus, data-quality contracts with a dead-letter queue, event-time windowed stream processing with anomaly detection (delay spikes, cancellations, stalled trains) and a live web dashboard with a map. It catches and fixes real feed defects, such as **1,193 delays off by ±24 h** in a single night, and tracks **around 700 trains at once** at peak time.
+status: in-progress
+icon: lucide:train-front
+tech: [python, kafka, duckdb, parquet, pydantic, fastapi, leaflet, docker, caddy, pytest]
+links:
+  repo: https://github.com/Carlosvd7/pulso-transporte
+image: ../../assets/projects/pulso-transporte.webp
+imageAlt:
+  es: 'Panel en vivo de Pulso del transporte: 741 trenes en circulación, retraso medio, puntualidad, anomalías, mapa de España con los trenes por color de retraso y tabla de líneas'
+  en: 'Transport Pulse live dashboard: 741 trains running, average delay, punctuality, anomalies, a map of Spain with trains coloured by delay and a table of lines'
